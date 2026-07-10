@@ -3,449 +3,661 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoàng Minh Phương | Digital Portfolio</title>
+    <title>Hoàng Minh Phương | Tiểu tinh cầu B-25042540</title>
     <style>
-        /* CSS Reset & Variables */
+        /* CSS Reset & Variables - Little Prince Theme */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace, 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
 
         :root {
-            --sky-deep: #0e1a30;
-            --sky-mid: #172d54;
-            --star-gold: #ffd166;
-            --fox-orange: #f2722b;
-            --rose-red: #e63946;
-            --cream-white: #f4f6fa;
-            --text-muted: #a5b1c2;
-            --hand-drawn-border: 255px 15px 225px 15px/15px 225px 15px 255px;
+            --sky-deep: #0b1930;
+            --sky-dark: #071120;
+            --star-gold: #fcd34d;
+            --star-gold-glow: rgba(252, 211, 77, 0.4);
+            --fox-orange: #f97316;
+            --rose-red: #f43f5e;
+            --canvas-white: #f8fafc;
+            --card-glass: rgba(15, 32, 66, 0.45);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
         }
 
-        /* Tái tạo chất liệu sần hạt (Grainy Noise Filter) giống ảnh vẽ sáp */
-        .grainy-overlay {
+        /* 1. Hiệu ứng hạt mịn vẽ tay (Canvas Grain Overlay) */
+        .grain-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.05;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 9999;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--sky-deep);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--star-gold);
-            border-radius: 10px;
+            opacity: 0.06;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         body {
-            background-color: var(--sky-deep);
-            color: var(--cream-white);
+            background-color: var(--sky-dark);
+            color: var(--text-main);
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Twinkling Starfield Background */
+        /* 2. Bầu trời sao nhấp nháy (Twinkling Stars Background) */
         .starfield {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
             pointer-events: none;
-            z-index: 1;
         }
 
         .star {
             position: absolute;
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 50%;
-            animation: twinkle 4s infinite ease-in-out;
+            animation: twinkle 3s infinite ease-in-out;
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 4px var(--star-gold)); }
+            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #fff; }
         }
 
-        /* Floating Clouds in the sky */
-        .cloud {
+        /* Navigation Bar */
+        header {
             position: fixed;
-            background: rgba(255, 255, 255, 0.03);
-            filter: blur(20px);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            animation: floatCloud 60s infinite linear;
-        }
-
-        @keyframes floatCloud {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100vw); }
-        }
-
-        /* Main Split-Screen Layout */
-        .main-container {
+            top: 0;
+            width: 100%;
+            padding: 20px 8%;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(7, 17, 32, 0.5);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            color: var(--star-gold);
+            animation: pulseStar 2s infinite ease-in-out;
+        }
+
+        .logo-text {
+            font-family: 'Georgia', serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--canvas-white);
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulseStar {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--star-gold)); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 8px var(--star-gold)); }
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--star-gold);
+            text-shadow: 0 0 8px var(--star-gold-glow);
+        }
+
+        .btn-drive-header {
+            background: linear-gradient(135deg, rgba(252, 211, 77, 0.1), rgba(249, 115, 22, 0.1));
+            border: 1px solid rgba(252, 211, 77, 0.4);
+            color: var(--star-gold);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .btn-drive-header:hover {
+            background: linear-gradient(135deg, var(--star-gold), var(--fox-orange));
+            color: var(--sky-dark);
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(252, 211, 77, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 3. Hero Section - Whimsical Little Prince Style */
+        .hero {
             min-height: 100vh;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Left Column: Celestial Fixed Profile */
-        .left-panel {
-            width: 40%;
-            position: fixed;
-            top: 0; left: 0; height: 100vh;
-            background: radial-gradient(circle at 50% 40%, var(--sky-mid) 0%, var(--sky-deep) 80%);
-            border-right: 2px dashed rgba(255, 255, 255, 0.08);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 40px;
-            text-align: center;
-        }
-
-        /* Right Column: Scrollable Content */
-        .right-panel {
-            width: 60%;
-            margin-left: 40%;
-            padding: 80px 10% 80px 8%;
-        }
-
-        /* Little Prince Inspired Frame for Avatar */
-        .avatar-dome {
+            justify-content: space-between;
+            padding: 120px 8% 60px 8%;
+            background: radial-gradient(circle at 70% 30%, var(--sky-deep) 0%, var(--sky-dark) 70%);
             position: relative;
-            width: 260px;
-            height: 260px;
+        }
+
+        .hero-content {
+            max-width: 55%;
+            z-index: 10;
+        }
+
+        .poetic-quote {
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 2px solid var(--star-gold);
+        }
+
+        /* Làm nổi bật tên to nhất */
+        .hero-name-big {
+            font-family: 'Georgia', serif;
+            font-size: 5.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--star-gold) 75%, var(--fox-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .hero-major {
+            font-size: 1.4rem;
+            color: var(--text-muted);
             margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-weight: 500;
         }
 
-        /* Chiếc vòm thủy tinh của hoa hồng lấp lánh bảo vệ avatar */
-        .dome-glass {
+        .hero-major span {
+            color: var(--star-gold);
+            font-weight: 600;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        /* Portrait Frame - Crescent Moon Style */
+        .hero-avatar-area {
+            position: relative;
+            width: 360px;
+            height: 360px;
+            z-index: 10;
+        }
+
+        .crescent-moon {
             position: absolute;
-            top: -15px; left: -15px;
-            width: 290px; height: 290px;
-            border: 3px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50% 50% 40% 40% / 55% 55% 45% 45%;
-            backdrop-filter: blur(1px);
-            box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.1), 0 0 20px rgba(77, 238, 234, 0.15);
-            animation: breatheDome 6s infinite ease-in-out;
+            top: -15px;
+            left: -15px;
+            width: calc(100% + 30px);
+            height: calc(100% + 30px);
+            border-radius: 50%;
+            box-shadow: -15px 10px 0 0 var(--star-gold);
+            opacity: 0.15;
+            transform: rotate(-25deg);
             pointer-events: none;
         }
 
-        @keyframes breatheDome {
-            0%, 100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.15); }
-            50% { transform: scale(1.03); border-color: rgba(255, 210, 100, 0.3); box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.15), 0 0 30px rgba(255, 210, 100, 0.25); }
+        .avatar-holder {
+            width: 100%;
+            height: 100%;
+            background: var(--card-glass);
+            border: 2px dashed rgba(252, 211, 77, 0.4);
+            border-radius: 50%;
+            padding: 12px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            transition: all 0.5s ease;
         }
 
-        .avatar-image-container {
+        .avatar-holder:hover {
+            border-color: var(--fox-orange);
+            transform: scale(1.03) rotate(2deg);
+        }
+
+        .avatar-img-wrap {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             overflow: hidden;
-            border: 4px solid var(--cream-white);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            transition: transform 0.5s ease;
         }
 
-        .avatar-image-container img {
+        .avatar-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: scale 0.5s ease;
         }
 
-        .avatar-dome:hover .avatar-image-container img {
+        .avatar-img-wrap:hover img {
             scale: 1.1;
         }
 
-        /* Làm nổi bật tên to nhất ở Herosection */
-        .profile-name {
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: var(--cream-white);
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2), 0 0 30px rgba(255, 209, 102, 0.3);
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        .profile-title {
-            font-size: 1rem;
-            color: var(--star-gold);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-
-        .profile-badges {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .profile-badge-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1.5px dashed rgba(255, 255, 255, 0.1);
-            border-radius: var(--hand-drawn-border);
-            padding: 10px 15px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
-        }
-
-        .profile-badge-item:hover {
-            border-color: var(--star-gold);
-            color: var(--cream-white);
-            transform: scale(1.02) rotate(-1deg);
-        }
-
-        /* Floating Navigation Bar */
-        .storybook-nav {
-            margin-top: 35px;
-            display: flex;
-            gap: 15px;
-        }
-
-        .storybook-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .storybook-nav a:hover, .storybook-nav a.active {
-            color: var(--star-gold);
-            border-color: rgba(255, 209, 102, 0.3);
-            background: rgba(255, 259, 102, 0.05);
-        }
-
-        /* Right Panel Cards (Story Chapters) */
-        .chapter {
-            margin-bottom: 80px;
-        }
-
-        .chapter-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .chapter-num {
-            font-size: 1.8rem;
-            color: var(--fox-orange);
-            font-weight: bold;
-        }
-
-        .chapter-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--cream-white);
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-            flex-grow: 1;
-        }
-
-        .storybook-card {
-            background: var(--sky-mid);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            /* Góc bo lệch ngẫu nhiên tạo style vẽ tay tranh cổ tích */
-            border-radius: var(--hand-drawn-border);
-            padding: 35px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .storybook-card:hover {
-            border-color: var(--star-gold);
-            transform: translateY(-5px) rotate(0.5deg);
-            box-shadow: 0 20px 40px rgba(255, 209, 102, 0.08);
-        }
-
-        /* Storybook content elements */
-        p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #d1d8e0;
-            margin-bottom: 15px;
-        }
-
-        /* Nút Xem bài tập trên GG drive theo yêu cầu */
-        .btn-storybook-drive {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--fox-orange), var(--star-gold));
-            color: #0c1524;
-            padding: 12px 28px;
-            border-radius: var(--hand-drawn-border);
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(242, 114, 43, 0.3);
-            margin: 20px 0;
-            border: none;
-        }
-
-        .btn-storybook-drive:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 209, 102, 0.5);
-        }
-
-        /* Project Planet Grid (Asymmetrical and whimsy) */
-        .planet-constellation {
+        /* Identity Details badges */
+        .identity-container {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
         }
 
-        .planet-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--hand-drawn-border);
-            padding: 25px 30px;
+        .id-badge {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            padding: 15px;
+            border-radius: 16px;
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            cursor: pointer;
-            transition: all 0.4s ease;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .planet-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--fox-orange);
-            transform: translateX(8px) scale(1.01);
-            box-shadow: 0 10px 20px rgba(242, 114, 43, 0.1);
+        .id-badge:hover {
+            transform: translateY(-3px);
+            border-color: rgba(252, 211, 77, 0.25);
+            background: rgba(15, 32, 66, 0.6);
         }
 
-        .planet-sphere {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gradient-planet, linear-gradient(135deg, #ffd166, #f2722b));
-            flex-shrink: 0;
+        .id-badge-icon {
+            color: var(--star-gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: 0 0 15px rgba(255, 209, 102, 0.2);
-            transition: transform 0.6s ease;
         }
 
-        .planet-card:hover .planet-sphere {
-            transform: rotate(360deg);
-        }
-
-        .planet-info h4 {
-            font-size: 1.15rem;
-            color: var(--cream-white);
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .planet-info p {
-            font-size: 0.9rem;
+        .id-badge-text div:first-child {
+            font-size: 0.75rem;
             color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Skills Constellation */
-        .star-skills {
+        .id-badge-text div:last-child {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--canvas-white);
+        }
+
+        /* Sections Styling */
+        section {
+            padding: 100px 8%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .poetic-tag {
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: var(--star-gold);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Georgia', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--canvas-white);
+            letter-spacing: -0.5px;
+        }
+
+        /* About Section (The Planet B-25042540) */
+        .planet-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 30px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .planet-intro p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .planet-tabs {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 10px;
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Georgia', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            cursor: pointer;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-button.active {
+            color: var(--star-gold);
+        }
+
+        .tab-button.active::after {
+            content: '✦';
+            position: absolute;
+            top: -5px;
+            right: 0;
+            font-size: 0.6rem;
+            color: var(--star-gold);
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeInPage 0.6s ease forwards;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .skill-galaxy {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin-top: 20px;
         }
 
         .star-tag {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
-            border-radius: 15px;
+            border: 1px solid rgba(252, 211, 77, 0.15);
+            padding: 8px 18px;
+            border-radius: 50px;
             font-size: 0.85rem;
-            color: var(--star-gold);
+            color: var(--text-main);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .star-tag:hover {
-            background: rgba(255, 209, 102, 0.1);
             border-color: var(--star-gold);
-            transform: scale(1.05) rotate(-2deg);
+            background: rgba(252, 211, 77, 0.08);
+            transform: scale(1.05);
         }
 
-        /* Interactive Wishing Star Button */
-        .wish-star-btn {
-            position: fixed;
-            bottom: 30px; right: 30px;
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            background: var(--star-gold);
-            color: var(--sky-deep);
+        .illustrated-deco {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Constellation Portal Banner */
+        .portal-banner {
+            background: linear-gradient(135deg, rgba(11, 25, 48, 0.8) 0%, rgba(7, 17, 32, 0.9) 100%);
+            border: 1px dashed rgba(252, 211, 77, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-banner::before {
+            content: '✦';
+            position: absolute;
+            right: 15%;
+            top: 20%;
+            color: rgba(252, 211, 77, 0.2);
+            font-size: 2rem;
+        }
+
+        .portal-text h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.5rem;
+            color: var(--canvas-white);
+            margin-bottom: 8px;
+        }
+
+        .portal-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .btn-drive-large {
+            background: linear-gradient(135deg, var(--star-gold) 0%, var(--fox-orange) 100%);
             border: none;
+            color: var(--sky-dark);
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
             cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(252, 211, 77, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-drive-large:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(252, 211, 77, 0.4);
+        }
+
+        /* 4. CHÒM SAO ĐỘC ĐÁO (Constellation Map Layout) */
+        .constellation-wrapper {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* Đường vẽ nối tinh cầu dạng đứt khúc lung linh */
+        .constellation-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 8px,
+                rgba(252, 211, 77, 0.25) 8px,
+                rgba(252, 211, 77, 0.25) 16px
+            );
+            z-index: 1;
+        }
+
+        .constellation-node {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 100px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .constellation-node:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .constellation-card-wrap {
+            width: 45%;
+        }
+
+        /* Thẻ tiểu tinh cầu học tập */
+        .planet-node-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 35px;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .planet-node-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(252, 211, 77, 0.4);
+            box-shadow: 0 15px 40px rgba(15, 32, 66, 0.5), 0 0 15px rgba(252, 211, 77, 0.15);
+            background: rgba(15, 32, 66, 0.6);
+        }
+
+        /* Điểm mốc chòm sao (Constellation Star Marker) */
+        .star-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: var(--sky-dark);
+            border: 3px solid var(--star-gold);
+            border-radius: 50%;
+            z-index: 5;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4);
-            z-index: 1000;
+            box-shadow: 0 0 12px var(--star-gold);
             transition: all 0.3s ease;
         }
 
-        .wish-star-btn:hover {
-            transform: scale(1.1) rotate(20deg);
-            box-shadow: 0 8px 25px rgba(255, 209, 102, 0.7);
+        .planet-node-card:hover ~ .star-marker,
+        .constellation-node:hover .star-marker {
+            background-color: var(--star-gold);
+            box-shadow: 0 0 25px var(--star-gold), 0 0 5px #fff;
+            transform: translateX(-50%) scale(1.2) rotate(45deg);
         }
 
-        .wishing-star {
+        .node-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--star-gold);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .node-title {
+            font-family: 'Georgia', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--canvas-white);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .node-summary {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .node-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
+        }
+
+        .node-tech {
+            font-size: 0.78rem;
+            color: var(--fox-orange);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .node-read {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .planet-node-card:hover .node-read {
+            color: var(--star-gold);
+            transform: translateX(5px);
+        }
+
+        /* Poetic Book Modals */
+        .modal-overlay {
             position: fixed;
-            pointer-events: none;
-            background: var(--star-gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: 999;
-            animation: fallAndFade 2s forwards linear;
-        }
-
-        @keyframes fallAndFade {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
-            100% { transform: translate(-200px, 400px) rotate(360deg) scale(0.3); opacity: 0; }
-        }
-
-        /* Detail Modal with Storybook Styling */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(14, 26, 48, 0.85);
-            backdrop-filter: blur(10px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 17, 32, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -456,91 +668,157 @@
             padding: 20px;
         }
 
-        .modal.active {
+        .modal-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .modal-content {
-            background: #152542;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: var(--hand-drawn-border);
+        .modal-book {
+            background: #0f1f38;
+            border: 2px solid rgba(252, 211, 77, 0.2);
+            border-radius: 28px;
             width: 100%;
-            max-width: 750px;
+            max-width: 820px;
             max-height: 85vh;
             overflow-y: auto;
             position: relative;
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 40px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+            padding: 45px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
 
-        .modal.active .modal-content {
-            transform: scale(1);
+        .modal-overlay.active .modal-book {
+            transform: translateY(0) scale(1);
         }
 
-        .modal-close {
+        .book-close {
             position: absolute;
-            top: 20px; right: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #fff;
-            width: 36px; height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: all 0.3s ease;
         }
 
-        .modal-close:hover {
-            background: var(--fox-orange);
-            color: #fff;
+        .book-close:hover {
+            background: var(--star-gold);
+            color: var(--sky-dark);
         }
 
-        .modal-header {
-            margin-bottom: 25px;
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
+        .book-header {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+            padding-bottom: 20px;
         }
 
-        .modal-badge {
-            color: var(--fox-orange);
+        .book-tag {
+            color: var(--star-gold);
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             display: inline-block;
         }
 
-        .modal-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--cream-white);
+        .book-title {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
         }
 
-        .modal-body {
-            color: #d1d8e0;
-            font-size: 0.95rem;
+        .book-body {
+            color: var(--text-muted);
+            font-size: 1rem;
             line-height: 1.8;
         }
 
-        .modal-section {
-            margin-bottom: 20px;
+        .book-section {
+            margin-bottom: 25px;
         }
 
-        .modal-section-title {
+        .book-section-title {
+            font-family: 'Georgia', serif;
+            font-style: italic;
             color: var(--star-gold);
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
         }
 
-        /* Scroll reveal class */
+        /* Reflection (Tổng kết) Section */
+        .memoirs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .memoir-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .memoir-card:hover {
+            border-color: rgba(249, 115, 22, 0.25);
+            background: rgba(15, 32, 66, 0.6);
+        }
+
+        .memoir-card h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.4rem;
+            color: var(--star-gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .memoir-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Custom Scrollbar for Book */
+        .modal-book::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-book::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .modal-book::-webkit-scrollbar-thumb {
+            background: var(--border-glass);
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 8%;
+            text-align: center;
+            border-top: 1px dashed var(--border-glass);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: var(--sky-dark);
+            position: relative;
+        }
+
+        /* Animation reveals */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -552,249 +830,450 @@
             transform: translateY(0);
         }
 
-        /* Mobile & Responsive Layout */
+        /* Responsive Layouts */
         @media (max-width: 1024px) {
-            .main-container {
-                flex-direction: column;
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 50px;
+                padding-top: 140px;
             }
-            .left-panel {
-                width: 100%;
-                position: relative;
-                height: auto;
-                padding: 60px 20px;
-                border-right: none;
-                border-bottom: 2px dashed rgba(255, 255, 255, 0.08);
+            .hero-content {
+                max-width: 100%;
             }
-            .right-panel {
-                width: 100%;
-                margin-left: 0;
-                padding: 60px 5%;
+            .poetic-quote {
+                border-left: none;
+                border-bottom: 2px solid var(--star-gold);
+                padding-left: 0;
+                padding-bottom: 15px;
+                display: inline-block;
             }
-            .storybook-nav {
-                display: none; /* Hide floating navigations on mobile for compactness */
+            .hero-name-big {
+                font-size: 3.8rem;
+            }
+            .planet-card {
+                grid-template-columns: 1fr;
+            }
+            .constellation-wrapper::before {
+                left: 20px;
+            }
+            .constellation-node {
+                flex-direction: row !important;
+                margin-bottom: 60px;
+            }
+            .constellation-card-wrap {
+                width: calc(100% - 50px);
+                margin-left: 50px;
+            }
+            .star-marker {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+            .planet-node-card:hover ~ .star-marker,
+            .constellation-node:hover .star-marker {
+                transform: translateX(-50%) scale(1.1) rotate(45deg);
+            }
+            .memoirs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* Giản lược menu trên thiết bị di động */
+            }
+            .hero-avatar-area {
+                width: 260px;
+                height: 260px;
+            }
+            .hero-name-big {
+                font-size: 2.8rem;
+            }
+            .identity-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Grainy Noise Overlay for illustration look -->
-    <div class="grainy-overlay"></div>
+    <!-- Canvas Grain Filter Effect Overlay -->
+    <div class="grain-overlay"></div>
 
-    <!-- Twinkling stars & floating clouds background -->
+    <!-- Twinkling Starfield Background -->
     <div class="starfield" id="starfield"></div>
-    <div class="cloud" style="top: 15%; width: 200px; height: 80px; animation-duration: 90s;"></div>
-    <div class="cloud" style="top: 55%; width: 300px; height: 100px; animation-duration: 120s; animation-delay: -30s;"></div>
 
-    <div class="main-container">
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-box" onclick="window.scrollTo(0, 0)">
+            <span class="logo-icon">✦</span>
+            <span class="logo-text">B-25042540</span>
+        </div>
+        <nav>
+            <a href="#hero" class="active">Tinh Cầu</a>
+            <a href="#giothieu">Kí Sự</a>
+            <a href="#chomsao">Hành Trình Bài Tập</a>
+            <a href="#memoirs">Chiêm Nghiệm</a>
+            <a class="btn-drive-header" target="_blank" href="https://drive.google.com/drive/folders/12198PqaYl_tvvE4hZwtpnL7dLPyb1uww?usp=drive_link">Xem bài tập trên GG drive</a>
+        </nav>
+    </header>
 
-        <!-- Left Column: Planet of Phuong (Fixed Hero Profile) -->
-        <div class="left-panel">
-            <div class="avatar-dome">
-                <div class="dome-glass"></div>
-                <div class="avatar-image-container">
-                    <!-- Sách cổ tích bảo tồn avatar gốc theo đúng cú pháp yêu cầu -->
-                    <img src="Hình 1.jpg" alt="Hoàng Minh Phương Portrait">
-                </div>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="poetic-quote">
+                "Người ta chỉ nhìn rõ bằng trái tim. Những gì cốt lõi vốn vô hình trong mắt trần..."
             </div>
+            <!-- Tên học viên nổi bật to nhất -->
+            <h1 class="hero-name-big">Hoàng Minh Phương</h1>
+            <div class="hero-major">
+                Sinh viên chuyên ngành <span>Ngôn ngữ và Văn hoá Hàn Quốc</span>
+                <p style="font-size: 0.95rem; margin-top: 10px; font-weight: normal; opacity: 0.85;">Trường Đại học Ngoại ngữ – Đại học Quốc gia Hà Nội (ULIS) [Học tập và Nghiên cứu, 1]</p>
+            </div>
+            <p class="hero-desc">
+                Chào mừng bạn đến với góc nhỏ tinh cầu học thuật của mình. Đây là cuốn nhật ký số lưu giữ hành trình chuyển mình từ một sinh viên ngôn ngữ trở thành một người làm chủ công nghệ và trí tuệ nhân tạo (AI) thông qua môn học <strong>"Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo"</strong> [Học tập và Nghiên cứu, 1].
+            </p>
             
-            <!-- Herosection làm nổi bật tên to nhất -->
-            <h1 class="profile-name">Hoàng Minh Phương</h1>
-            <p class="profile-title">Ngôn ngữ và Văn hoá Hàn Quốc</p>
-
-            <div class="profile-badges">
-                <div class="profile-badge-item">
-                    <span style="color: var(--star-gold);">Mã sinh viên:</span> 25042540
+            <div class="identity-container">
+                <div class="id-badge">
+                    <div class="id-badge-icon">✦</div>
+                    <div class="id-badge-text">
+                        <div>Mã số sinh viên</div>
+                        <div>25042540</div>
+                    </div>
                 </div>
-                <div class="profile-badge-item">
-                    <span style="color: var(--star-gold);">Chi đoàn:</span> Lớp 25K9 (ULIS)
+                <div class="id-badge">
+                    <div class="id-badge-icon">✦</div>
+                    <div class="id-badge-text">
+                        <div>Chi đoàn lớp</div>
+                        <div>25K9 (ULIS)</div>
+                    </div>
                 </div>
-                <div class="profile-badge-item">
-                    <span style="color: var(--star-gold);">Trường:</span> Đại học Ngoại ngữ - ĐHQGHN
-                </div>
-            </div>
-
-            <div class="storybook-nav">
-                <a href="#chuong-1" class="active">Về Tôi</a>
-                <a href="#chuong-2">Sản Phẩm</a>
-                <a href="#chuong-3">Lời Kết</a>
             </div>
         </div>
 
-        <!-- Right Column: Storybook Journey -->
-        <div class="right-panel">
-
-            <!-- Chương 1: Giới thiệu -->
-            <section class="chapter reveal" id="chuong-1">
-                <div class="chapter-header">
-                    <span class="chapter-num">Chương I</span>
-                    <h2 class="chapter-title">Người lữ hành tinh tế</h2>
+        <div class="hero-avatar-area">
+            <div class="crescent-moon"></div>
+            <div class="avatar-holder">
+                <div class="avatar-img-wrap">
+                    <!-- Ảnh chân dung sinh viên -->
+                    <img src="Hình 1.jpg" alt="Hoàng Minh Phương">
                 </div>
-                <div class="storybook-card">
-                    <p>
-                        "Có những đóa hoa chỉ nở một lần trên tinh cầu của bạn..." [Lợi ích và tác hại, 1] 
-                        Đối với mình, khoá học **Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo** chính là đóa hoa rực rỡ soi sáng chặng đường học tập tại giảng đường Đại học Ngoại ngữ (ULIS) [Học tập và Nghiên cứu, 1].
-                    </p>
-                    <p>
-                        Là một sinh viên theo đuổi chuyên ngành tiếng Hàn, mình hiểu rõ giá trị của sự giao thoa văn hóa [Hallyu, 1]. Trong kỷ nguyên số ngày nay, việc kết hợp giữa ngôn ngữ học truyền thống cùng các kỹ nghệ máy tính thông minh chính là bệ phóng giúp mình tiến xa hơn [Hallyu, 1, 2].
-                    </p>
-                    <p>
-                        Tại hành tinh này, mình đã gom góp được rất nhiều ngôi sao kỹ năng:
-                    </p>
-                    <div class="star-skills">
-                        <span class="star-tag">★ Kỹ nghệ Prompt</span>
-                        <span class="star-tag">★ Quản trị tệp tin</span>
-                        <span class="star-tag">★ Canva & Microsoft Designer</span>
-                        <span class="star-tag">★ Google Suite & MS Teams</span>
-                        <span class="star-tag">★ Phân tích liêm chính học thuật</span>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (The Little Asteroid) -->
+    <section id="giothieu" class="reveal">
+        <div class="section-header">
+            <span class="poetic-tag">Tiểu tinh cầu tự sự</span>
+            <h2 class="section-title">Kí Sự Kỷ Nguyên Số</h2>
+        </div>
+        <div class="planet-card">
+            <div class="planet-intro">
+                <p>
+                    Là một sinh viên theo đuổi ngôn ngữ học [Học tập và Nghiên cứu, 1], mình luôn khao khát được kết nối những ranh giới xa xôi của văn hóa đại chúng Hàn Quốc (Hallyu) với phương pháp tiếp cận khoa học hiện đại [Hallyu, 1]. Môn học này không chỉ mở ra cho mình những kỹ năng máy tính cơ bản [Quản lý tệp tin, 1] mà còn hướng dẫn mình cách "đối thoại chuyên nghiệp" với các hệ thống AI để phục vụ nghiên cứu và sáng tạo nghệ thuật trực quan [Prompt học tập, 1; Lợi ích và tác hại, 1].
+                </p>
+                
+                <div class="planet-tabs">
+                    <button class="tab-button active" onclick="switchTabPane(event, 'vision')">Viễn Cảnh</button>
+                    <button class="tab-button" onclick="switchTabPane(event, 'interests')">Sự Say Mê</button>
+                    <button class="tab-button" onclick="switchTabPane(event, 'constellation-skills')">Chòm Sao Kỹ Năng</button>
                 </div>
-            </section>
 
-            <!-- Xem bài tập trên GG Drive trước phần bài tập -->
-            <section class="reveal" style="margin-bottom: 50px;">
-                <div class="storybook-card" style="text-align: center; border-color: var(--fox-orange);">
-                    <h3 style="font-size: 1.2rem; color: var(--star-gold); margin-bottom: 10px;">★ Bản đồ kho báu học thuật ★</h3>
-                    <p style="font-size: 0.9rem;">Toàn bộ tài liệu báo cáo PDF, tệp tin thực hành thực tế đã được lưu giữ cẩn thận tại thư mục đám mây Google Drive.</p>
-                    <a class="btn-storybook-drive" target="_blank" href="https://drive.google.com/drive/folders/12198PqaYl_tvvE4hZwtpnL7dLPyb1uww?usp=drive_link">
-                        Xem bài tập trên GG drive ➔
-                    </a>
-                </div>
-            </section>
-
-            <!-- Chương 2: 6 Bài tập cá nhân -->
-            <section class="chapter reveal" id="chuong-2">
-                <div class="chapter-header">
-                    <span class="chapter-num">Chương II</span>
-                    <h2 class="chapter-title">Lục địa của những vì sao</h2>
-                </div>
-                <div class="planet-constellation">
-
-                    <!-- Bài 1 -->
-                    <div class="planet-card" onclick="openModal('proj1')">
-                        <div class="planet-sphere" style="--gradient-planet: linear-gradient(135deg, #1d4ca1, #4deeea);">💻</div>
-                        <div class="planet-info">
-                            <h4>Bài 1: Sắp xếp sơ đồ số của hành tinh</h4>
-                            <p>Khai phá cấu trúc hệ điều hành Windows, thiết lập thư mục ThucHanh_HoangMinhPhuong, tổ chức sắp xếp dữ liệu khoa học.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bài 2 -->
-                    <div class="planet-card" onclick="openModal('proj2')">
-                        <div class="planet-sphere" style="--gradient-planet: linear-gradient(135deg, #f2722b, #ffd166);">🇰🇷</div>
-                        <div class="planet-info">
-                            <h4>Bài 2: Đi tìm dòng chảy văn hóa Kim Chi</h4>
-                            <p>Khảo cứu khoa học làn sóng Hallyu ảnh hưởng đến động cơ học tiếng Hàn, thiết lập danh mục 10 nguồn tin chuẩn Harvard.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bài 3 -->
-                    <div class="planet-card" onclick="openModal('proj3')">
-                        <div class="planet-sphere" style="--gradient-planet: linear-gradient(135deg, #e63946, #ffd166);">💬</div>
-                        <div class="planet-info">
-                            <h4>Bài 3: Ngôn từ gửi đến các vì sao</h4>
-                            <p>Kiến tạo chuỗi câu lệnh ChatGPT theo 3 cấp độ (Cơ bản - Cải tiến - Nâng cao) để thu thập tri thức tối ưu.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bài 4 -->
-                    <div class="planet-card" onclick="openModal('proj4')">
-                        <div class="planet-sphere" style="--gradient-planet: linear-gradient(135deg, #4deeea, #9e77f8);">👥</div>
-                        <div class="planet-info">
-                            <h4>Bài 4: Bản hòa ca kết nối những hành tinh</h4>
-                            <p>Tổng kết quy trình làm việc nhóm trực tuyến thông qua G-Docs, G-Drive và MS Teams nhằm tối đa hiệu suất.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bài 5 -->
-                    <div class="planet-card" onclick="openModal('proj5')">
-                        <div class="planet-sphere" style="--gradient-planet: linear-gradient(135deg, #ffd166, #e63946);">🎨</div>
-                        <div class="planet-info">
-                            <h4>Bài 5: Sắc màu thời đại Trí tuệ nhân tạo</h4>
-                            <p>Thiết kế bức tranh Infographic phân tích thấu đáo mặt lợi và hại của AI bằng sự phối hợp của 3 mô hình GenAI sáng giá.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bài 6 -->
-                    <div class="planet-card" onclick="openModal('proj6')">
-                        <div class="planet-sphere" style="--gradient-planet: linear-gradient(135deg, #9e77f8, #f2722b);">📜</div>
-                        <div class="planet-info">
-                            <h4>Bài 6: Hiệp ước liêm chính vũ trụ</h4>
-                            <p>Xây dựng 7 nguyên tắc chuẩn mực đạo đức cá nhân khi dùng AI giảng đường theo quy chuẩn giáo dục văn minh của ULIS.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- Chương 3: Tổng kết chiêm nghiệm -->
-            <section class="chapter reveal" id="chuong-3">
-                <div class="chapter-header">
-                    <span class="chapter-num">Chương III</span>
-                    <h2 class="chapter-title">Khoảng lặng dưới ánh sao</h2>
-                </div>
-                <div class="storybook-card" style="border-color: rgba(255, 259, 102, 0.2);">
-                    <p>
-                        "Người ta chỉ nhìn rõ bằng trái tim. Những điều cốt lõi thường vô hình trong mắt trần." [Lợi ích và tác hại, 1] 
-                        Bước ra từ khóa học, điều sâu sắc nhất đọng lại trong mình không chỉ là điểm số hay chứng chỉ số, mà chính là sự trưởng thành trong tư duy học tập có trách nhiệm trong kỷ nguyên số [Học tập và Nghiên cứu, 1, 4].
-                    </p>
-                    <p>
-                        Mình đã hiểu rằng AI là một người thầy dẫn lối thông tuệ, một người bạn cáo trung thành nếu lữ khách biết cách lắng nghe và kiểm chứng cẩn trọng [Học tập và Nghiên cứu, 4, 5]. Khó khăn về mặt quản trị thời gian hay cách thức lập luận câu lệnh đã giúp mình tôi luyện sự nhẫn nại và tư duy độc lập [Cộng tác nhóm, 2; Prompt học tập, 1].
-                    </p>
-                    <p>
-                        Hành trình mới chỉ bắt đầu, và những vì tinh tú của tri thức công nghệ này sẽ tiếp tục là kim chỉ nam giúp mình bay cao bay xa hơn trên con đường dịch thuật và nghiên cứu văn hóa sau này [Hallyu, 1].
+                <div id="vision" class="tab-pane active">
+                    <p style="font-size: 0.95rem; line-height: 1.7;">
+                        Nghiên cứu ứng dụng trí tuệ nhân tạo có đạo đức trong học thuật [Sử dụng AI có trách nhiệm, 1], mở rộng hiểu biết về biên phiên dịch Việt - Hàn thông qua các mô hình ngôn ngữ lớn tiên tiến nhất.
                     </p>
                 </div>
-            </section>
+                <div id="interests" class="tab-pane">
+                    <p style="font-size: 0.95rem; line-height: 1.7;">
+                        Phân tích động lực học tập ngôn ngữ của thế hệ trẻ thông qua phim truyền hình, nhạc K-Pop [Hallyu, 1], lưu trữ và kết nối các tư liệu số một cách có tổ chức khoa học [Quản lý tệp tin, 1].
+                    </p>
+                </div>
+                <div id="constellation-skills" class="tab-pane">
+                    <div class="skill-galaxy">
+                        <span class="star-tag">✦ Prompt Engineering (Cấp độ 3)</span>
+                        <span class="star-tag">✦ Visual Infographic Design (Canva AI)</span>
+                        <span class="star-tag">✦ Trực quan hóa Microsoft Designer</span>
+                        <span class="star-tag">✦ Tổ chức đám mây Google Workspace</span>
+                        <span class="star-tag">✦ Liêm chính & Đạo đức AI</span>
+                        <span class="star-tag">✦ Đánh giá tài liệu chuẩn Harvard</span>
+                    </div>
+                </div>
+            </div>
 
+            <!-- SVG Illustration of Little Prince theme -->
+            <div class="illustrated-deco">
+                <svg width="240" height="240" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px var(--star-gold-glow));">
+                    <!-- Planet base -->
+                    <circle cx="100" cy="115" r="55" fill="url(#planetGrad)" />
+                    <!-- Ring -->
+                    <ellipse cx="100" cy="115" rx="75" ry="12" fill="none" stroke="var(--star-gold)" stroke-width="3" transform="rotate(-15 100 115)" stroke-dasharray="10 5" />
+                    <!-- Rose under dome -->
+                    <path d="M100 70v15" stroke="var(--fox-orange)" stroke-width="2" />
+                    <circle cx="100" cy="65" r="8" fill="var(--rose-red)" />
+                    <path d="M96 73c1.5-1 3.5-1 5 0" stroke="var(--canvas-white)" stroke-width="1" />
+                    <!-- Glass dome -->
+                    <path d="M80 110A25 25 0 01120 110" stroke="var(--canvas-white)" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <!-- Stars around -->
+                    <path d="M100 20l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="var(--star-gold)" />
+                    <path d="M45 60l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" fill="#fff" />
+                    <path d="M155 75l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" fill="var(--star-gold)" />
+                    <defs>
+                        <linearGradient id="planetGrad" x1="45" y1="60" x2="155" y2="170" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#1e40af" />
+                            <stop offset="0.5" stop-color="#0f172a" />
+                            <stop offset="1" stop-color="#020617" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Golden Key Drive Banner -->
+    <section style="padding: 20px 8% 40px 8%;" class="reveal">
+        <div class="portal-banner">
+            <div class="portal-text">
+                <h3>Thư Mục Lưu Trữ Đám Mây Toàn Diện</h3>
+                <p>Nơi lưu trữ và đồng bộ hóa toàn bộ tài liệu gốc, báo cáo đầy đủ của 6 bài tập cá nhân trên Google Drive [Học tập và Nghiên cứu, 1].</p>
+            </div>
+            <a class="btn-drive-large" target="_blank" href="https://drive.google.com/drive/folders/12198PqaYl_tvvE4hZwtpnL7dLPyb1uww?usp=drive_link">
+                Xem bài tập trên GG drive ✦
+            </a>
+        </div>
+    </section>
+
+    <!-- Constellation Map of 6 Assignments -->
+    <section id="chomsao" class="reveal">
+        <div class="section-header">
+            <span class="poetic-tag">Con đường tơ lụa kỹ thuật số</span>
+            <h2 class="section-title">Hành Trình Qua 6 Hành Tinh Tri Thức</h2>
+        </div>
+
+        <div class="constellation-wrapper">
+            
+            <!-- Node 1 -->
+            <div class="constellation-node">
+                <div class="constellation-card-wrap">
+                    <div class="planet-node-card" onclick="openBookModal('task1')">
+                        <span class="node-tag">TINH CẦU 1 ✦ THƯ MỤC</span>
+                        <h3 class="node-title">Quản lý tệp tin và tổ chức không gian lưu trữ số</h3>
+                        <p class="node-summary">Thiết lập nền móng đầu tiên của tư duy máy tính thông qua quy trình chuẩn hóa thư mục ThucHanh_HoangMinhPhuong, nâng cao kỹ năng sao chép, đổi tên và khôi phục tệp dữ liệu [Quản lý tệp tin, 1, 2].</p>
+                        <div class="node-footer">
+                            <span class="node-tech">HĐH Windows</span>
+                            <span class="node-read">Mở sách <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="star-marker">✦</div>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="constellation-node">
+                <div class="constellation-card-wrap">
+                    <div class="planet-node-card" onclick="openBookModal('task2')">
+                        <span class="node-tag">TINH CẦU 2 ✦ TÌM KIẾM</span>
+                        <h3 class="node-title">Khảo cứu làn sóng Hallyu & Động lực tiếng Hàn</h3>
+                        <p class="node-summary">Thực nghiệm khai thác 10 tài liệu tham khảo chất lượng cao chuẩn Harvard về đề tài ảnh hưởng của Hallyu đến việc học ngôn ngữ. Phân tích chi tiết và đánh giá độ tin cậy của nguồn lực [Hallyu, 1, 2].</p>
+                        <div class="node-footer">
+                            <span class="node-tech">Harvard Bibliographical</span>
+                            <span class="node-read">Mở sách <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="star-marker">✦</div>
+            </div>
+
+            <!-- Node 3 -->
+            <div class="constellation-node">
+                <div class="constellation-card-wrap">
+                    <div class="planet-node-card" onclick="openBookModal('task3')">
+                        <span class="node-tag">TINH CẦU 3 ✦ KỸ NGHỆ PROMPT</span>
+                        <h3 class="node-title">Nghệ thuật viết Prompt & Đối thoại đa tác vụ</h3>
+                        <p class="node-summary">Sự kết hợp tinh túy của 3 cấp độ Prompt (Cơ bản, Cải tiến, Nâng cao) để chỉ đạo AI thực hiện mượt mà các tác vụ tóm tắt học thuật, giải thích khái niệm sâu sắc và soạn đề thi trắc nghiệm [Prompt học tập, 1].</p>
+                        <div class="node-footer">
+                            <span class="node-tech">Prompt Engineering</span>
+                            <span class="node-read">Mở sách <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="star-marker">✦</div>
+            </div>
+
+            <!-- Node 4 -->
+            <div class="constellation-node">
+                <div class="constellation-card-wrap">
+                    <div class="planet-node-card" onclick="openBookModal('task4')">
+                        <span class="node-tag">TINH CẦU 4 ✦ LIÊN KẾT NHÓM</span>
+                        <h3 class="node-title">Hợp tác đám mây vượt không gian & thời gian</h3>
+                        <p class="node-summary">Cách thức tận dụng triệt để Google Docs đồng biên tập, Google Drive quản lý cấu trúc tệp nhóm và Microsoft Teams tổ chức họp trực tuyến, vượt qua xung đột lịch trình cá nhân [Cộng tác nhóm, 1, 2].</p>
+                        <div class="node-footer">
+                            <span class="node-tech">Cloud Collaboration</span>
+                            <span class="node-read">Mở sách <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="star-marker">✦</div>
+            </div>
+
+            <!-- Node 5 -->
+            <div class="constellation-node">
+                <div class="constellation-card-wrap">
+                    <div class="planet-node-card" onclick="openBookModal('task5')">
+                        <span class="node-tag">TINH CẦU 5 ✦ SÁNG TẠO AI</span>
+                        <h3 class="node-title">Sáng tạo nghệ thuật Infographic cùng GenAI</h3>
+                        <p class="node-summary">Sản xuất thành công tác phẩm truyền thông "Lợi ích và tác hại của AI". Sử dụng ChatGPT lập dàn ý, Microsoft Designer vẽ hình minh họa và Canva AI tinh chỉnh thẩm mỹ [Lợi ích và tác hại, 1, 2].</p>
+                        <div class="node-footer">
+                            <span class="node-tech">GenAI Design Flow</span>
+                            <span class="node-read">Mở sách <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="star-marker">✦</div>
+            </div>
+
+            <!-- Node 6 -->
+            <div class="constellation-node">
+                <div class="constellation-card-wrap">
+                    <div class="planet-node-card" onclick="openBookModal('task6')">
+                        <span class="node-tag">TINH CẦU 6 ✦ LIÊM CHÍNH SỐ</span>
+                        <h3 class="node-title">Kiến tạo chuẩn mực Đạo đức & Liêm chính AI</h3>
+                        <p class="node-summary">Thấu hiểu sâu sắc chính sách liêm chính của Đại học Ngoại ngữ (ULIS), tự xây dựng 7 nguyên tắc đạo đức học tập cá nhân và sơ đồ trực quan "Nên & Không nên" [Sử dụng AI có trách nhiệm, 1, 5, 6].</p>
+                        <div class="node-footer">
+                            <span class="node-tech">Academic Ethics</span>
+                            <span class="node-read">Mở sách <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="star-marker">✦</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Memoirs (Tổng kết chiêm nghiệm) Section -->
+    <section id="memoirs" class="reveal">
+        <div class="section-header">
+            <span class="poetic-tag">Nhật kí hành trình du hành</span>
+            <h2 class="section-title">Nhìn Lại Tiểu Tinh Cầu Tri Thức</h2>
+        </div>
+        <div class="memoirs-grid">
+            <div class="memoir-card">
+                <h3>
+                    <span style="color: var(--star-gold);">✦</span> 
+                    Người dẫn đường trung thực (AI)
+                </h3>
+                <p>
+                    Khoá học đã khai sáng cho mình góc nhìn vô cùng sâu sắc: Trí tuệ nhân tạo (AI) giống như một người đồng hành trung thực, hỗ trợ ta mở rộng không gian suy tưởng chứ không phải kẻ làm thay bài tập hay lấy đi tư duy độc lập của người học [Sử dụng AI có trách nhiệm, 1].
+                </p>
+                <p>
+                    Từ việc làm chủ các thao tác máy tính cơ bản [Quản lý tệp tin, 1] đến việc thiết kế sơ đồ đạo đức khoa học [Sử dụng AI có trách nhiệm, 6], mình nhận ra sức mạnh to lớn khi ngôn ngữ nghệ thuật được tiếp thêm đôi cánh của công nghệ số.
+                </p>
+            </div>
+            <div class="memoir-card">
+                <h3>
+                    <span style="color: var(--fox-orange);">✦</span> 
+                    Bảo hộ bông hồng nghiên cứu
+                </h3>
+                <p>
+                    Dù việc làm quen với kỹ nghệ prompt chi tiết gặp không ít khó khăn ban đầu [Prompt học tập, 1], hay việc làm việc nhóm từ xa gặp bất đồng về thời gian biểu [Cộng tác nhóm, 2], mình vẫn nỗ lực và tìm ra hướng khắc phục nhờ vào sự kiên trì và tinh thần học hỏi sáng tạo [Cộng tác nhóm, 2].
+                </p>
+                <p>
+                    Trong tương lai, mình khao khát ứng dụng vững chắc các nền tảng công nghệ số đã được học để thực hiện nhiều công trình phân tích sâu sắc hơn về ngôn ngữ và văn hoá Hàn Quốc [Hallyu, 1].
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Celestial Footer -->
+    <footer>
+        <p>© 2026 Hoàng Minh Phương | MSSV: 25042540 [Học tập và Nghiên cứu, 1]</p>
+        <p style="font-size: 0.8rem; opacity: 0.55; margin-top: 5px;">Môn học: Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo – Khoa NN&VH Hàn Quốc (ULIS) [Học tập và Nghiên cứu, 1]</p>
+    </footer>
+
+    <!-- Stylized Fairy-tale Open Book Modal -->
+    <div class="modal-overlay" id="book-modal">
+        <div class="modal-book">
+            <button class="book-close" onclick="closeBookModal()">&times;</button>
+            <div class="book-header">
+                <span class="book-tag" id="book-badge">Mục tinh cầu</span>
+                <h3 class="book-title" id="book-title">Tiêu đề bài viết</h3>
+            </div>
+            <div class="book-body" id="book-body">
+                <!-- Content gets injected by JS -->
+            </div>
         </div>
     </div>
 
-    <!-- Wishing Star button -->
-    <button class="wish-star-btn" onclick="makeAWish(event)">★</button>
-
-    <!-- Modal for details -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div class="modal-header">
-                <span class="modal-badge" id="modal-badge">Hành tinh số</span>
-                <h3 class="modal-title" id="modal-title">Tiêu đề hành tinh</h3>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Content injected dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript code -->
+    <!-- JavaScript to manage starry backgrounds and layouts -->
     <script>
-        // Generate Starry night sky dynamically matching image style
+        // 1. Tạo chòm sao nhấp nháy ngẫu nhiên trong bầu trời đêm
         const starfield = document.getElementById('starfield');
-        const numStars = 60;
-        for (let i = 0; i < numStars; i++) {
+        const numberOfStars = 80;
+
+        for (let i = 0; i < numberOfStars; i++) {
             const star = document.createElement('div');
-            star.classList.add('star');
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            const size = Math.random() * 2.5 + 0.5;
+            star.className = 'star';
+            
+            // Tốc độ và khoảng cách ngẫu nhiên
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 2 + 1;
+            const delay = Math.random() * 3;
+            const duration = Math.random() * 3 + 2;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
-            star.style.animationDelay = `${Math.random() * 4}s`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.animationDuration = `${duration}s`;
+
             starfield.appendChild(star);
         }
 
-        // Active link tracking on scroll
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY + 120;
-            const sections = document.querySelectorAll('.chapter');
-            const navLinks = document.querySelectorAll('.storybook-nav a');
+        // 2. Chuyển đổi tab trong mục "Về bản thân"
+        function switchTabPane(event, paneId) {
+            const tabs = document.querySelectorAll('.tab-pane');
+            const buttons = document.querySelectorAll('.tab-button');
 
-            sections.forEach(sec => {
-                if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+            tabs.forEach(pane => pane.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(paneId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // 3. Scroll Reveal animation
+        const revealItems = document.querySelectorAll('.reveal');
+        const triggerReveal = () => {
+            revealItems.forEach(item => {
+                const topOfItem = item.getBoundingClientRect().top;
+                const viewHeight = window.innerHeight;
+                if (topOfItem < viewHeight - 100) {
+                    item.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', triggerReveal);
+        window.addEventListener('load', () => {
+            triggerReveal();
+            document.querySelector('.hero').classList.add('active');
+        });
+
+        // 4. Đồng bộ hóa Scroll Spy cho thanh Menu
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY + 120;
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a:not(.btn-drive-header)');
+
+            sections.forEach(section => {
+                if (currentScroll >= section.offsetTop && currentScroll < section.offsetTop + section.offsetHeight) {
                     navLinks.forEach(link => {
                         link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sec.getAttribute('id')}`) {
+                        if (link.getAttribute('href') === `#${section.getAttribute('id')}`) {
                             link.classList.add('active');
                         }
                     });
@@ -802,186 +1281,166 @@
             });
         });
 
-        // Trigger reveal animations on scroll
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOnScroll = () => {
-            revealElements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 80) {
-                    el.classList.add('active');
-                }
-            });
-        };
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
-
-        // Falling wishing stars generator on button click
-        function makeAWish(e) {
-            const star = document.createElement('div');
-            star.classList.add('wishing-star');
-            star.style.left = `${e.clientX}px`;
-            star.style.top = `${e.clientY}px`;
-            const size = Math.random() * 15 + 10;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            document.body.appendChild(star);
-            setTimeout(() => {
-                star.remove();
-            }, 2000);
-        }
-
-        // Project Database matching Phuong's actual reports
-        const projectsData = {
-            proj1: {
-                badge: "CHƯƠNG II: PHÂN KHU HÀNH TINH 1",
-                title: "Thao tác cơ bản với tệp tin và thư mục trên HĐH",
+        // 5. Nội dung 6 tinh cầu tri thức dựa trên báo cáo thực tế
+        const booksData = {
+            task1: {
+                badge: "TIỂU TINH CẦU 1 ✦ HỆ ĐIỀU HÀNH",
+                title: "Quản lý tệp tin và thiết lập hệ thống lưu trữ số học thuật",
                 content: `
-                    <div class="modal-section">
-                        <p class="modal-section-title">Mục tiêu bài học</p>
-                        <p>Xây dựng thói quen và chuẩn hóa kỹ năng quản trị tệp tin một cách khoa học trên máy tính cá nhân. Thiết lập hệ thống thư mục logic giúp tối ưu hóa thời gian lưu trữ và truy cập thông tin khi thực hành các tác vụ kỹ thuật số.</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Khát vọng hành trình</p>
+                        <p>Làm chủ "địa lý" cơ bản của hệ điều hành máy tính. Để xây dựng những bài nghiên cứu văn hóa hay ngôn ngữ đồ sộ trong tương lai, mình cần rèn luyện thói quen lưu trữ ngăn nắp, bảo quản dữ liệu an toàn [Quản lý tệp tin, 1].</p>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Quá trình thực hành cá nhân</p>
-                        <p>Mình đã hoàn thành trọn vẹn 12 bước thực nghiệm trực tiếp trên hệ thống máy tính chạy Windows:</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Nhật ký thực nghiệm hành tinh</p>
+                        <p>Trực tiếp vượt qua thử thách 12 bước thao tác cơ bản trên Windows để kiểm soát tập dữ liệu hoàn hảo [Quản lý tệp tin, 1, 2]:</p>
                         <ul style="padding-left: 20px; margin-top: 5px;">
-                            <li>Tạo hệ thống thư mục gốc <strong>ThucHanh_HoangMinhPhuong</strong> tại ổ đĩa trống an toàn của hệ thống [Quản lý tệp tin, 1, 2].</li>
-                            <li>Tạo tệp văn bản GhiChu.txt và thực hiện thao tác đổi tên khoa học thành <strong>GhiChuQuanTrong.txt</strong> để nâng cấp định danh dữ liệu [Quản lý tệp tin, 2, 3].</li>
-                            <li>Xây dựng cấu trúc cây thư mục con mang tên <strong>TaiLieu</strong>, thực nghiệm cơ chế sao chép (Copy & Paste) tệp tin vào thư mục con [Quản lý tệp tin, 3, 4].</li>
-                            <li>Thực nghiệm cơ chế di chuyển triệt để tệp tin (Cut & Paste) đối với file <strong>DiChuyen.txt</strong> từ thư mục cha vào thư mục con nhằm tiết kiệm dung lượng [Quản lý tệp tin, 5, 6].</li>
-                            <li>Thực hành kỹ năng dọn dẹp hệ thống: xóa tệp tin, khôi phục tệp bị xóa nhầm từ Thùng rác (Recycle Bin) và xóa vĩnh viễn (Shift + Delete) không qua khâu trung gian an toàn [Quản lý tệp tin, 6, 7].</li>
+                            <li>Kiến tạo thư mục gốc <strong>ThucHanh_HoangMinhPhuong</strong> tại ổ đĩa thứ cấp an toàn [Quản lý tệp tin, 1, 2].</li>
+                            <li>Tạo lập tệp tin thô GhiChu.txt và thực hiện nâng cấp tên gọi nghệ thuật thành <strong>GhiChuQuanTrong.txt</strong> để tăng tính định danh dữ liệu [Quản lý tệp tin, 2, 3].</li>
+                            <li>Khởi tạo thư mục con <strong>TaiLieu</strong>, thực hành thành công lệnh sao chép (Copy) và nhân bản tệp tin gốc vào cấu trúc con an toàn [Quản lý tệp tin, 3, 4].</li>
+                            <li>Thực hành lệnh di chuyển vĩnh viễn (Cut) tệp <strong>DiChuyen.txt</strong> từ thư mục cha để dọn dẹp dung lượng hệ thống gọn gàng [Quản lý tệp tin, 5, 6].</li>
+                            <li>Tập dượt quy trình dọn dẹp: xoá tệp dữ liệu, phục hồi nguyên trạng tệp đã xoá từ Thùng rác (Recycle Bin) và xoá vĩnh viễn tệp rác (Shift + Delete) không qua khâu trung gian an toàn [Quản lý tệp tin, 6, 7].</li>
                         </ul>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Kết quả đạt được</p>
-                        <p>Báo cáo bài tập phản ánh sự thuần thục tuyệt đối các kỹ năng điều hành cấu trúc lưu trữ nội dung số, tạo bước đệm hoàn hảo để quản trị hàng nghìn tệp tư liệu ngôn ngữ học phức tạp trong tương lai.</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Thành quả gặt hái</p>
+                        <p>Kỹ năng quản trị lưu trữ vững chãi giúp mình lưu trữ gọn gàng hàng nghìn tài liệu ngôn ngữ và các bài báo khoa học chất lượng cao mà không bao giờ lo thất lạc.</p>
                     </div>
                 `
             },
-            proj2: {
-                badge: "CHƯƠNG II: PHÂN KHU HÀNH TINH 2",
-                title: "Khai thác và đánh giá nguồn tin học thuật chất lượng cao",
+            task2: {
+                badge: "TIỂU TINH CẦU 2 ✦ TINH VÂN KHẢO CỨU",
+                title: "Đánh giá thông tin & Thẩm định tài liệu học thuật",
                 content: `
-                    <div class="modal-section">
-                        <p class="modal-section-title">Đề tài nghiên cứu lựa chọn</p>
-                        <p style="font-style: italic;">"Ảnh hưởng của làn sóng Hallyu đối với động lực học tiếng Hàn của sinh viên Việt Nam hiện nay." [Hallyu, 1]</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Đề tài nghiên cứu lựa chọn</p>
+                        <p style="font-style: italic; color: var(--star-gold);">"Ảnh hưởng của làn sóng Hallyu đối với động lực học tiếng Hàn của sinh viên Việt Nam hiện nay." [Hallyu, 1]</p>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Chi tiết sản phẩm</p>
-                        <p>Dựa trên hệ thống thư viện chính thống VNU Library và cổng học thuật KCI, mình đã lập danh mục nghiên cứu gồm <strong>10 tài liệu tham khảo chất lượng cao theo đúng định dạng chuẩn Harvard</strong> gồm [Hallyu, 1, 2]:</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Nhật ký thực nghiệm hành tinh</p>
+                        <p>Thông qua VNU Library và cơ sở dữ liệu quốc tế KCI, mình đã khảo cứu và chọn lọc ra <strong>10 tài liệu tham khảo chính thống xuất sắc, đồng bộ hóa tuyệt đối dưới định dạng chuẩn Harvard</strong> gồm [Hallyu, 1, 2]:</p>
                         <ul style="padding-left: 20px; margin-top: 5px;">
-                            <li><strong>5 Bài báo khoa học chuẩn mực:</strong> Nghiên cứu của các học giả hàng đầu như Nguyễn (2022) từ Tạp chí Khoa học Ngoại ngữ; Kim (2021) từ Journal of Korean Language Education; Trần (2023) phân tích mối liên hệ tiêu dùng văn hóa đại chúng và năng lực giao tiếp [Hallyu, 1].</li>
-                            <li><strong>5 Tài liệu chính thống khác:</strong> Bao gồm báo cáo thống kê chính phủ từ Bộ Giáo dục Hàn Quốc (2023); Sách chuyên khảo chất lượng cao từ NXB Đại học Yonsei (Lee, 2019); Báo cáo xu hướng toàn cầu từ Korea Foundation (2025) [Hallyu, 1].</li>
+                            <li><strong>5 Bài báo khoa học chất lượng cao:</strong> Các nghiên cứu xuất sắc của Nguyễn (2022) từ Tạp chí Khoa học Ngoại ngữ; Kim (2021) từ Journal of Korean Language Education; hay Trần (2023) về mối liên hệ tiêu dùng văn hoá đại chúng và năng lực giao tiếp [Hallyu, 1].</li>
+                            <li><strong>5 Tài liệu học thuật bổ trợ uy tín:</strong> Báo cáo thống kê chính phủ từ Bộ Giáo dục Hàn Quốc (2023); sách chuyên khảo do Đại học danh tiếng Yonsei xuất bản (Lee, 2019); và báo cáo xu hướng thường niên của Korea Foundation (2025) [Hallyu, 1].</li>
                         </ul>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Bảng đánh giá mức độ tin cậy</p>
-                        <p>Xây dựng hoàn chỉnh bảng xếp hạng phân tích phương pháp luận định lượng/định tính, cơ quan xuất bản uy tín (Scopus/KCI), tính cập nhật cao trong vòng 5 năm gần nhất và thang đánh giá độ tin cậy 1-5 sao cực kỳ trực quan [Hallyu, 2].</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Định lượng mức độ tin cậy</p>
+                        <p>Xây dựng hoàn thiện bảng phân tích chuyên sâu các yếu tố: danh tính tác giả học thuật đầu ngành, danh tiếng của đơn vị xuất bản, phương pháp nghiên cứu khảo sát định lượng định tính và tính cập nhật cao trong vòng 5 năm qua (thang chấm 1-5 sao trực quan) [Hallyu, 2].</p>
                     </div>
                 `
             },
-            proj3: {
-                badge: "CHƯƠNG II: PHÂN KHU HÀNH TINH 3",
-                title: "Thử nghiệm và đánh giá hiệu quả của Prompt trong học tập",
+            task3: {
+                badge: "TIỂU TINH CẦU 3 ✦ CHÒM SAO ĐỐI THOẠI",
+                title: "Kỹ nghệ viết Prompt - Nghệ thuật chỉ huy Trí tuệ nhân tạo",
                 content: `
-                    <div class="modal-section">
-                        <p class="modal-section-title">Chi tiết thử nghiệm cá nhân</p>
-                        <p>Thực nghiệm hiệu năng tương tác trên cùng một mô hình ChatGPT với 3 cấp độ Prompt từ thấp đến cao trên 3 nhiệm vụ đặc thù [Prompt học tập, 1, 2, 3]:</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Nhật ký thực nghiệm hành tinh</p>
+                        <p>Đồng loạt thực nghiệm và so sánh chéo 3 cấp độ Prompt (Cơ bản - Cải tiến - Nâng cao) trên 3 nhiệm vụ học thuật cốt lõi để thấu hiểu năng lực phản hồi của ChatGPT [Prompt học tập, 1, 2, 3]:</p>
                         <ol style="padding-left: 20px; margin-top: 5px;">
-                            <li><strong>Tác vụ 1 - Tóm tắt văn bản biến đổi khí hậu:</strong> Prompt nâng cao nhập vai "Giảng viên đại học môi trường", yêu cầu tóm tắt 150 từ, xuất 5 gạch đầu dòng, giải thích lại bằng ngôn từ đơn giản hóa cho học sinh THPT. Kết quả vượt trội so với prompt cơ bản thiếu cấu trúc [Prompt học tập, 1].</li>
-                            <li><strong>Tác vụ 2 - Giải thích khái niệm Trí tuệ nhân tạo (AI):</strong> Gán vai "Giáo viên tin học", chia nhỏ yêu cầu: giải thích khái niệm, nguyên lý hoạt động, 3 ví dụ trực quan đời thực, phân tích hai mặt lợi ích và giới hạn của AI [Prompt học tập, 2].</li>
-                            <li><strong>Tác vụ 3 - Thiết kế bộ câu hỏi ôn luyện:</strong> Gán vai "Giáo viên Địa lý" để thiết lập bộ 10 câu hỏi trắc nghiệm khí hậu, phân bổ cấu trúc từ dễ đến khó, yêu cầu AI cung cấp lời giải thích chi tiết cho từng phương án đúng [Prompt học tập, 3, 4].</li>
+                            <li><strong>Nhiệm vụ 1 - Tóm tắt văn bản biến đổi khí hậu:</strong> Prompt nâng cao gán vai "Giảng viên đại học chuyên ngành môi trường", yêu cầu tóm tắt khoa học dưới 150 từ, trình bày 5 gạch đầu dòng và giải thích lại bằng ngôn ngữ giản đơn cho học sinh THPT [Prompt học tập, 1].</li>
+                            <li><strong>Nhiệm vụ 2 - Giải thích học thuật khái niệm AI phức tạp:</strong> Gán vai "Giáo viên Tin học" phân tích cho học sinh lớp 12 hiểu sâu về định nghĩa, nguyên lý vận hành, 3 ví dụ thực tiễn đời sống cùng ưu/nhược điểm cụ thể [Prompt học tập, 2].</li>
+                            <li><strong>Nhiệm vụ 3 - Kiến tạo đề ôn tập trắc nghiệm:</strong> Gán vai "Giáo viên Địa lý" tạo lập bộ 10 câu trắc nghiệm khí hậu có đáp án chi tiết và giải thích cụ thể cho từng lựa chọn để học sinh tự ôn luyện [Prompt học tập, 3, 4].</li>
                         </ol>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">7 Nguyên tắc viết Prompt hiệu quả đúc rút</p>
-                        <p>1. Xác định rõ mục tiêu cốt lõi; 2. Cung cấp bối cảnh cụ thể; 3. Chỉ định vai trò (Role Prompting); 4. Chia nhỏ nhiệm vụ (Chain-of-thought); 5. Quy định rõ định dạng đầu ra (Output format); 6. Định vị rõ ràng đối tượng tiếp nhận; 7. Sử dụng ví dụ mẫu (Few-shot prompting) [Prompt học tập, 4, 5].</p>
+                    <div class="book-section">
+                        <p class="book-section-title">7 Nguyên tắc đúc rút</p>
+                        <p>Xây dựng hệ thống 7 nguyên tắc thiết kế câu lệnh: rõ mục tiêu, đủ bối cảnh, gán vai trò rõ rệt, phân rã các bước suy luận, định rõ định dạng đầu ra, định vị đối tượng người đọc và sử dụng kỹ thuật đưa ví dụ mẫu (few-shot prompting) [Prompt học tập, 4, 5].</p>
                     </div>
                 `
             },
-            proj4: {
-                badge: "CHƯƠNG II: PHÂN KHU HÀNH TINH 4",
-                title: "Hợp tác trực tuyến tối ưu hóa hiệu suất làm việc từ xa",
+            task4: {
+                badge: "TIỂU TINH CẦU 4 ✦ HÀNH TINH LIÊN KẾT",
+                title: "Sử dụng công cụ hợp tác trực tuyến để gắn kết tập thể",
                 content: `
-                    <div class="modal-section">
-                        <p class="modal-section-title">Bối cảnh áp dụng</p>
-                        <p>Tổng kết thực tiễn quá trình đồng hành cùng tập thể nhóm để hoàn thành dự án học phần. Khắc phục triệt để các rào cản bất đồng lịch trình học tập thông qua ba công cụ cốt lõi [Cộng tác nhóm, 1, 2]:</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Nhật ký thực nghiệm hành tinh</p>
+                        <p>Phân tích quá trình phối hợp nhóm thực hiện dự án khoa học vượt qua rào cản thời gian và địa lý dựa trên bộ ba công cụ cộng tác trực tuyến [Cộng tác nhóm, 1, 2]:</p>
                         <ul style="padding-left: 20px; margin-top: 5px;">
-                            <li><strong>Google Docs:</strong> Soạn thảo nội dung báo cáo đồng thời theo thời gian thực (Real-time). Tận dụng tối đa tính năng bình luận thảo luận phản biện trực tiếp và tính năng tự động ghi nhớ, lưu lịch sử sửa đổi giúp tránh thất lạc thông tin [Cộng tác nhóm, 1, 2].</li>
-                            <li><strong>Google Drive:</strong> Hệ thống lưu trữ tập trung. Phân cấp dữ liệu khoa học thành các thư mục "Báo cáo dự án", "Hình ảnh minh họa", "Tài liệu bổ sung", phân quyền truy cập (view/edit) chính xác đến từng cá nhân [Cộng tác nhóm, 1, 2].</li>
-                            <li><strong>Microsoft Teams:</strong> Kênh họp trực tuyến chính thức để phân chia nhiệm vụ chi tiết và cập nhật tiến độ công việc liên tục trong tuần [Cộng tác nhóm, 2].</li>
+                            <li><strong>Google Docs:</strong> Nền tảng đồng soạn thảo báo cáo, thảo luận và phản biện đa chiều thời gian thực thông qua hệ thống bình luận trực quan, hạn chế thất lạc ý tưởng nhờ lịch sử chỉnh sửa tự động lưu trữ [Cộng tác nhóm, 1, 2].</li>
+                            <li><strong>Google Drive:</strong> Cây thư mục đám mây tập trung, bảo đảm dữ liệu nhóm "Báo cáo", "Hình ảnh", "Tài liệu tham khảo" được cấu trúc khoa học và phân quyền truy cập chuẩn mực [Cộng tác nhóm, 1, 2].</li>
+                            <li><strong>Microsoft Teams:</strong> Kênh họp trực tuyến chính thức để phân công nhiệm vụ, giải quyết xung đột lịch trình cá nhân và thống nhất nội dung [Cộng tác nhóm, 2].</li>
                         </ul>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Bài học rút ra</p>
-                        <p>Rèn luyện kỹ năng quản trị thời gian, lắng nghe chủ động, thấu hiểu quy trình cộng tác chuyên nghiệp và nâng cao trách nhiệm cá nhân đối với tiến độ công việc tập thể [Cộng tác nhóm, 2, 3].</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Chiêm nghiệm quý giá</p>
+                        <p>Rèn luyện tư duy làm việc nhóm chuyên nghiệp, kỹ năng lắng nghe phản biện lành mạnh và nâng cao trách nhiệm cá nhân đối với thành tựu của tập thể [Cộng tác nhóm, 2, 3].</p>
                     </div>
                 `
             },
-            proj5: {
-                badge: "CHƯƠNG II: PHÂN KHU HÀNH TINH 5",
-                title: "Ứng dụng Trí tuệ nhân tạo tạo sinh (GenAI) thiết kế đồ họa",
+            task5: {
+                badge: "TIỂU TINH CẦU 5 ✦ TINH VÂN SÁNG TẠO",
+                title: "Tạo sinh nghệ thuật truyền thông cùng GenAI",
                 content: `
-                    <div class="modal-section">
-                        <p class="modal-section-title">Ý tưởng thiết kế Infographic</p>
-                        <p style="font-weight: 600;">Chủ đề: "Lợi ích và tác hại của Trí tuệ nhân tạo (AI)" [Lợi ích và tác hại, 1]</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Sản phẩm truyền thông nghệ thuật</p>
+                        <p style="font-weight: 600; color: var(--star-gold);">Infographic: "Lợi ích và tác hại của Trí tuệ nhân tạo (AI)" [Lợi ích và tác hại, 1]</p>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Quy trình phối hợp 3 công cụ AI đột phá</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Nhật ký thực nghiệm hành tinh</p>
+                        <p>Vận hành quy trình phối hợp khép kín giữa 3 công cụ AI đột phá để thiết kế tác phẩm đồ họa thông tin hoàn chỉnh [Lợi ích và tác hại, 1, 2]:</p>
                         <ol style="padding-left: 20px; margin-top: 5px;">
-                            <li><strong>ChatGPT:</strong> Thiết lập nội dung text sườn cấu trúc tinh giản tối đa cực kỳ phù hợp hiển thị trực quan đồ họa. Trích xuất 5 lợi ích vàng (hỗ trợ học tập, tăng hiệu suất, tự động hóa) và 5 mặt hạn chế sâu sắc (nguy cơ mất việc, bảo mật, sai lệch thông tin) [Lợi ích và tác hại, 1].</li>
-                            <li><strong>Microsoft Designer:</strong> Tạo hình minh họa hiện đại với prompt chi tiết bằng tiếng Anh: "Create modern AI technology illustrations showing benefits and risks of artificial intelligence, infographic style, blue color theme..." [Lợi ích và tác hại, 2].</li>
-                            <li><strong>Canva AI:</strong> Sắp xếp bố cục đồ họa cân xứng, hòa phối tông màu xanh dương thanh lịch, căn chỉnh kiểu chữ (Typography) nghệ thuật để hoàn thiện sản phẩm đồ họa trực quan, sắc nét [Lợi ích và tác hại, 2].</li>
+                            <li><strong>ChatGPT:</strong> Chịu trách nhiệm chắt lọc nội dung thô, tối ưu hóa từ ngữ ngắn gọn súc tích phù hợp hoàn toàn với không gian trình bày đồ họa cô đọng [Lợi ích và tác hại, 1].</li>
+                            <li><strong>Microsoft Designer:</strong> Tạo sinh hình ảnh minh họa robot công nghệ hiện đại thông qua câu lệnh tiếng Anh chi tiết: "Create modern AI technology illustrations showing benefits and risks of artificial intelligence, blue color theme..." [Lợi ích và tác hại, 2].</li>
+                            <li><strong>Canva AI:</strong> Hòa phối bố cục cân đối, đồng bộ hóa tông màu xanh dương thẳm nghệ thuật, tối ưu kiểu chữ để xuất bản sản phẩm đồ họa xuất sắc [Lợi ích và tác hại, 2].</li>
                         </ol>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Nhận định cá nhân</p>
-                        <p>AI là trợ thủ rút ngắn 70% thời gian thực hiện nhưng năng lực thẩm mỹ và tư duy chỉnh sửa cốt lõi của con người mới là yếu tố quyết định chất lượng cuối cùng của tác phẩm truyền thông [Lợi ích và tác hại, 2, 3].</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Chiêm nghiệm</p>
+                        <p>AI là trợ thủ rút ngắn thời gian tìm kiếm ý tưởng, nhưng tư duy cấu trúc thẩm mỹ và việc biên tập kỹ lưỡng từ bàn tay con người mới là chìa khóa tạo nên một tác phẩm chạm đến trái tim người xem [Lợi ích và tác hại, 2, 3].</p>
                     </div>
                 `
             },
-            proj6: {
-                badge: "CHƯƠNG II: PHÂN KHU HÀNH TINH 6",
-                title: "Kiến tạo quy định liêm chính học thuật trong thời đại số",
+            task6: {
+                badge: "TIỂU TINH CẦU 6 ✦ HÀNH TINH LIÊM CHÍNH",
+                title: "Văn hóa Đạo đức & Quy tắc ứng xử Trí tuệ nhân tạo lành mạnh",
                 content: `
-                    <div class="modal-section">
-                        <p class="modal-section-title">Phân tích chính sách ULIS</p>
-                        <p>Nghiên cứu sâu sắc các định hướng văn minh từ Trường Đại học Ngoại ngữ (ULIS). Nhà trường nhiệt lệ khuyến khích sinh viên tiếp cận khoa học công nghệ, xem AI là <strong>công cụ bổ trợ đắc lực</strong>, hoàn toàn không phải công cụ thay thế cho tư duy độc lập và nghiên cứu đích thực của bản thân [Sử dụng AI có trách nhiệm, 1].</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Nhật ký thực nghiệm hành tinh</p>
+                        <p>Nghiên cứu chính sách của trường Đại học Ngoại ngữ (ULIS). Nhà trường nhiệt liệt khuyến khích sinh viên sáng tạo khoa học công nghệ, xem AI là <strong>công cụ hỗ trợ tư duy chứ không phải công cụ thay thế</strong> cho chất xám của người học [Sử dụng AI có trách nhiệm, 1].</p>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Bộ 7 nguyên tắc đạo đức sử dụng AI cá nhân</p>
-                        <ol style="padding-left: 20px; margin-top: 5px; font-size: 0.95rem;">
-                            <li>Sử dụng AI để hỗ trợ tìm ý tưởng, không để AI làm thay toàn bộ bài tập [Sử dụng AI có trách nhiệm, 5].</li>
-                            <li>Luôn chủ động đối chiếu, kiểm chứng thông tin AI cung cấp bằng các nguồn chính thống [Sử dụng AI có trách nhiệm, 5].</li>
-                            <li>Tuyệt đối không sao chép nguyên văn sản phẩm của AI nộp dưới danh nghĩa cá nhân [Sử dụng AI có trách nhiệm, 5].</li>
-                            <li>Luôn minh bạch, trung thực về việc sử dụng công cụ AI khi giảng viên yêu cầu [Sử dụng AI có trách nhiệm, 5].</li>
-                            <li>Tôn trọng quyền sở hữu trí tuệ và trung thực học thuật [Sử dụng AI có trách nhiệm, 5].</li>
-                            <li>Bảo vệ thông tin cá nhân bảo mật, không tải các dữ liệu nhạy cảm lên mô hình AI [Sử dụng AI có trách nhiệm, 5].</li>
-                            <li>Rèn luyện không ngừng năng lực tư duy phản biện độc lập [Sử dụng AI có trách nhiệm, 5].</li>
-                        </ol>
+                    <div class="book-section">
+                        <p class="book-section-title">Bộ 7 quy tắc đạo đức cá nhân xây dựng</p>
+                        <p>Thiết lập chuẩn mực liêm chính học thuật cá nhân [Sử dụng AI có trách nhiệm, 5]:</p>
+                        <ul style="padding-left: 20px; margin-top: 5px;">
+                            <li>Sử dụng AI để hỗ trợ tìm ý tưởng, không sao chép nguyên văn bài viết [Sử dụng AI có trách nhiệm, 5].</li>
+                            <li>Kiểm chứng kỹ lưỡng thông tin AI cung cấp bằng nguồn tài liệu chính thống [Sử dụng AI có trách nhiệm, 5].</li>
+                            <li>Luôn minh bạch việc sử dụng công cụ AI trước giảng viên và nhà trường [Sử dụng AI có trách nhiệm, 5].</li>
+                            <li>Bảo vệ dữ liệu cá nhân nhạy cảm khi tương tác trên môi trường mạng [Sử dụng AI có trách nhiệm, 5].</li>
+                        </ul>
                     </div>
-                    <div class="modal-section">
-                        <p class="modal-section-title">Thiết kế Sơ đồ Đồ họa</p>
-                        <p>Mình đã hoàn chỉnh Infographic hướng dẫn <strong>Nên làm</strong> (như gợi ý ý tưởng, kiểm chứng nguồn tài liệu học thuật) và <strong>Không nên làm</strong> (sao chép nguyên văn bài viết, tin tưởng mù quáng không chọn lọc) để định hình văn hóa học tập lành mạnh tại ULIS [Sử dụng AI có trách nhiệm, 6].</p>
+                    <div class="book-section">
+                        <p class="book-section-title">Sản phẩm đồ hoạ</p>
+                        <p>Tự thiết kế tác phẩm Infographic chỉ dẫn trực quan quy tắc <strong>"Nên làm"</strong> (Tìm kiếm ý tưởng, giải thích thuật ngữ khó, sửa lỗi ngữ pháp ngôn ngữ) và <strong>"Không nên làm"</strong> (Ý lại hoàn toàn, chép nguyên văn sản phẩm AI tạo ra để nộp) để lan tỏa văn hóa học thuật liêm chính tại ULIS [Sử dụng AI có trách nhiệm, 6].</p>
                     </div>
                 `
             }
         };
 
-        // Modal control script
-        function openModal(id) {
-            const data = projectsData[id];
+        // 6. Quản lý hoạt động đóng mở sách Modal
+        function openBookModal(taskId) {
+            const data = booksData[taskId];
             if (!data) return;
-            document.getElementById('modal-badge').innerText = data.badge;
-            document.getElementById('modal-title').innerText = data.title;
-            document.getElementById('modal-body').innerHTML = data.content;
-            document.getElementById('modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+
+            document.getElementById('book-badge').innerText = data.badge;
+            document.getElementById('book-title').innerText = data.title;
+            document.getElementById('book-body').innerHTML = data.content;
+
+            document.getElementById('book-modal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Khóa scroll nền
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+        function closeBookModal() {
+            document.getElementById('book-modal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Mở scroll nền
         }
+
+        // Đóng khi click ngoài hộp sách
+        document.getElementById('book-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('book-modal')) {
+                closeBookModal();
+            }
+        });
     </script>
 </body>
 </html>
