@@ -1,11 +1,44 @@
+Dưới đây là phiên bản nâng cấp toàn diện cho file index.html. Toàn bộ 6 bài tập
+cá nhân trong phần Hành trình của bạn đã được tích hợp các bộ mô phỏng trực quan
+và bảng tương tác (Interactive Widgets) bằng JavaScript/CSS thuần [Quản lý tệp
+tin, 1; Hallyu, 1; Prompt học tập, 1; Cộng tác nhóm, 1, 2; Lợi ích và tác
+hại, 1, 2; Sử dụng AI có trách nhiệm, 5, 6].
+
+Khi bạn bấm mở bất kỳ bài tập nào, một thế giới đồ họa tương tác độc đáo sẽ hiện
+ra trực tiếp trên màn hình:
+
+  - Bài 1 (Hệ điều hành): Một Trình quản lý tệp tin giả lập (File Manager
+    Simulator) với sơ đồ thư mục trực quan. Bạn có thể bấm từng nút hành động để
+    chứng kiến tệp tin được tạo lập, đổi tên, sao chép, di chuyển và xóa theo
+    đúng 12 bước thực nghiệm [Quản lý tệp tin, 1].
+  - Bài 2 (Tìm kiếm học thuật): Một Thước đo độ tin cậy tài liệu (Source
+    Credibility Evaluator). Bạn có thể tự tay điều chỉnh các thanh trượt tiêu
+    chí học thuật để xem thuật toán tự động tính toán điểm số và xếp hạng sao uy
+    tín theo thời gian thực [Hallyu, 2].
+  - Bài 3 (Kỹ nghệ Prompt): Một Đài thử nghiệm Prompt (Prompt Testing Arena) cho
+    phép lựa chọn cấp độ câu lệnh từ Cơ bản đến Nâng cao, hiển thị hiệu ứng AI
+    tự động trả về phản hồi tương ứng theo hoạt cảnh trò chuyện [Prompt học
+    tập, 1].
+  - Bài 4 (Hợp tác nhóm): Một Bảng điều khiển Tiến độ Cộng tác (Collaboration
+    Flow Dashboard) giúp bạn mô phỏng cách giải quyết xung đột lịch trình và
+    phân cấp quyền truy cập dữ liệu [Cộng tác nhóm, 2].
+  - Bài 5 (Sáng tạo AI): Một Trạm thiết kế Infographic phối hợp AI (GenAI
+    Infographic Assembly Board) cho phép lắp ráp bản vẽ từ ChatGPT, Microsoft
+    Designer và Canva AI theo thời gian thực [Lợi ích và tác hại, 1, 2].
+  - Bài 6 (Đạo đức AI): Một Trò chơi phân loại Hành vi Liêm chính (AI Ethics
+    Sorting Game) cho phép phân tích 6 kịch bản thực tế để sắp xếp vào cột Nên
+    làm và Không nên làm tại ULIS [Sử dụng AI có trách nhiệm, 1, 6].
+
+Mã nguồn hoàn chỉnh cho file index.html:
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoàng Minh Phương | Digital Portfolio - Tiểu tinh cầu B-25042540</title>
-    <!-- Nhúng Google Fonts hỗ trợ tiếng Việt hoàn hảo, tránh hoàn toàn lỗi hiển thị dấu -->
     <style>
+        /* Nhập font chữ tiếng Việt cao cấp tránh mọi lỗi diacritic hiển thị */
         @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
         /* CSS Reset & Variables - Little Prince Theme */
@@ -21,7 +54,7 @@
             --sky-deep: #0a1325;
             --sky-dark: #050a14;
             --star-gold: #fbbf24;
-            --star-gold-glow: rgba(251, 191, 36, 0.4);
+            --star-gold-glow: rgba(251, 191, 36, 0.45);
             --fox-orange: #f97316;
             --rose-red: #f43f5e;
             --canvas-white: #f8fafc;
@@ -792,7 +825,274 @@
             display: inline-block;
         }
 
-        /* 5. INTERACTIVE TIMELINE FOR TASKS (12 STEPS FOR TASK 1) */
+        /* PREMIUM INTERACTIVE SIMULATION WIDGETS STYLES */
+
+        /* 1. File Explorer Widget (Task 1) */
+        .simulator-box {
+            background: #090e1a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .simulator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .path-bar {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .sim-btn {
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: var(--star-gold);
+            padding: 8px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .sim-btn:hover {
+            background: var(--star-gold);
+            color: #000;
+        }
+        .sim-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: transparent;
+            border-color: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+        }
+        .explorer-view {
+            background: #050811;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 120px;
+        }
+        .explorer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            animation: fadeInPage 0.3s ease forwards;
+        }
+        .explorer-item.folder {
+            color: var(--star-gold);
+        }
+        .explorer-item.file {
+            color: var(--text-main);
+        }
+
+        /* 2. Source Credibility Calculator Widget (Task 2) */
+        .calculator-box {
+            background: #090e1a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .calc-control {
+            margin-bottom: 12px;
+        }
+        .calc-control label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+        .calc-slider {
+            width: 100%;
+            accent-color: var(--star-gold);
+        }
+        .calc-display {
+            background: #050811;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .meter-stars {
+            font-size: 1.5rem;
+            color: var(--star-gold);
+        }
+
+        /* 3. Prompt Testing Arena Widget (Task 3) */
+        .prompt-arena {
+            background: #090e1a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .prompt-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .prompt-sel-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .prompt-sel-btn.active {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--star-gold);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+        .arena-terminal {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 15px;
+        }
+        .terminal-panel {
+            background: #050811;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: #10b981;
+            min-height: 150px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        .terminal-panel.output {
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.1);
+        }
+
+        /* 4. Collaboration Flow Dashboard Widget (Task 4) */
+        .collab-dashboard {
+            background: #090e1a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .collab-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .collab-timeline {
+            background: #050811;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 100px;
+        }
+        .collab-task-bar {
+            height: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .collab-progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--star-gold), var(--fox-orange));
+            width: 0%;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* 5. GenAI Assembly Board Widget (Task 5) */
+        .assembly-board {
+            background: #090e1a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .assembly-controls {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+        .assembly-preview {
+            background: #050811;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        /* 6. Ethics Sorting Game Widget (Task 6) */
+        .ethics-game {
+            background: #090e1a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .ethics-card {
+            background: #050811;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-glass);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--canvas-white);
+        }
+        .ethics-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .ethics-zone {
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .ethics-zone:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .ethics-zone.do:hover {
+            border-color: #10b981;
+            color: #10b981;
+        }
+        .ethics-zone.dont:hover {
+            border-color: var(--rose-red);
+            color: var(--rose-red);
+        }
+
+        /* Step Timeline */
         .step-timeline {
             position: relative;
             margin: 20px 0;
@@ -1448,7 +1748,7 @@
             });
         });
 
-        // 5. NỘI DUNG 6 BÀI TẬP CÁ NHÂN CHI TIẾT
+        // 5. NỘI DUNG 6 BÀI TẬP CÁ NHÂN CHI TIẾT KÈM ĐỒ HỌA TƯƠNG TÁC XỊN XÒ
         const booksData = {
             task1: {
                 badge: "TIỂU TINH CẦU 1 ✦ HỆ ĐIỀU HÀNH",
@@ -1523,6 +1823,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- WIDGET TƯƠNG TÁC 1: GIẢ LẬP TRÌNH QUẢN LÝ TỆP TIN -->
+                    <div class="book-section">
+                        <p class="book-section-title">✦ Trải nghiệm giả lập File Explorer tương tác</p>
+                        <p style="font-size:0.85rem; margin-bottom:10px; color:var(--star-gold);">*Bấm lần lượt các nút hành động bên dưới để trải nghiệm trực quan cơ chế quản trị tệp tin và thư mục:</p>
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <div class="path-bar" id="sim-path">This PC > Local Disk (D:) ></div>
+                            </div>
+                            <div class="action-grid">
+                                <button class="sim-btn" id="btn-step1" onclick="runFileSim(1)">Tạo Thư Mục Gốc</button>
+                                <button class="sim-btn" id="btn-step2" onclick="runFileSim(2)" disabled>Tạo file GhiChu</button>
+                                <button class="sim-btn" id="btn-step3" onclick="runFileSim(3)" disabled>Đổi tên GhiChu</button>
+                                <button class="sim-btn" id="btn-step4" onclick="runFileSim(4)" disabled>Tạo thư mục con</button>
+                                <button class="sim-btn" id="btn-step5" onclick="runFileSim(5)" disabled>Sao chép tệp</button>
+                                <button class="sim-btn" id="btn-step6" onclick="runFileSim(6)" disabled>Xoá tệp</button>
+                                <button class="sim-btn" id="btn-step7" onclick="runFileSim(7)" disabled>Khôi phục tệp</button>
+                            </div>
+                            <div class="explorer-view" id="explorer-content">
+                                <p style="color:var(--text-muted); font-style:italic; font-size:0.85rem;">Thư mục trống. Hãy bắt đầu bằng cách tạo thư mục gốc.</p>
+                            </div>
+                        </div>
+                    </div>
                 `
             },
             task2: {
@@ -1569,12 +1892,39 @@
                         <div class="book-section">
                             <p class="book-section-title">Tiêu chí thẩm định nghiêm ngặt</p>
                             <p>Để đánh giá và xếp hạng độ uy tín từ 1 đến 5 sao của các nguồn lực, bài viết đã phân tích chi tiết dựa trên 4 bộ lọc chuẩn học thuật:</p>
-                            <ul style="padding-left: 20px; margin-top: 5px;">
+                            <ul style="padding-left: 20px; margin-top: 5px; margin-bottom: 20px;">
                                 <li><strong>Về tác giả:</strong> Ưu tiên nghiên cứu từ các giáo sư, tiến sĩ đầu ngành tại các trường đại học lớn danh tiếng như ULIS hay các đại học tại Hàn Quốc (Yonsei, SNU).</li>
                                 <li><strong>Cơ quan xuất bản:</strong> Các tạp chí nằm trong danh mục tính điểm của Hội đồng Giáo sư Nhà nước hoặc CSDL uy tín quốc tế như Scopus/KCI có giá trị cao nhất.</li>
                                 <li><strong>Phương pháp nghiên cứu:</strong> Những bài báo có số liệu khảo sát định lượng thực tế có giá trị ứng dụng cao hơn các bài viết mang tính cảm nhận cá nhân đơn thuần.</li>
                                 <li><strong>Tính cập nhật:</strong> Văn hóa Hallyu thay đổi rất nhanh, bài tập ưu tiên các tài liệu xuất bản gần nhất trong khoảng 5 năm trở lại đây.</li>
                             </ul>
+                        </div>
+                        
+                        <!-- WIDGET TƯƠNG TÁC 2: BẢNG TÍNH ĐỘ TIN CẬY TÀI LIỆU -->
+                        <div class="book-section">
+                            <p class="book-section-title">✦ Thử nghiệm Thước đo độ tin cậy tài liệu học thuật</p>
+                            <p style="font-size:0.85rem; margin-bottom:12px; color:var(--star-gold);">*Kéo thử các thanh trượt bên dưới để đo lường tự động độ uy tín và số sao đánh giá của một tài liệu học thuật tham khảo:</p>
+                            <div class="calculator-box">
+                                <div class="calc-control">
+                                    <label><span>Học hàm / Học vị của tác giả:</span><span id="lbl-author">Thạc sĩ</span></label>
+                                    <input type="range" class="calc-slider" id="slider-author" min="1" max="3" value="1" oninput="calculateCredibility()">
+                                </div>
+                                <div class="calc-control">
+                                    <label><span>Uy tín cơ quan xuất bản:</span><span id="lbl-publisher">Nguồn Web tự do</span></label>
+                                    <input type="range" class="calc-slider" id="slider-publisher" min="1" max="3" value="1" oninput="calculateCredibility()">
+                                </div>
+                                <div class="calc-control">
+                                    <label><span>Phương pháp luận khoa học:</span><span id="lbl-method">Cảm nhận cá nhân</span></label>
+                                    <input type="range" class="calc-slider" id="slider-method" min="1" max="3" value="1" oninput="calculateCredibility()">
+                                </div>
+                                <div class="calc-display">
+                                    <div>
+                                        <p style="font-size: 0.75rem; color:var(--text-muted); text-transform:uppercase;">Chỉ số tin cậy tính toán</p>
+                                        <p id="calc-score" style="font-size:1.6rem; font-weight:800; color:var(--star-gold);">Trung Bình (2 / 5 Sao)</p>
+                                    </div>
+                                    <div class="meter-stars" id="meter-stars-display">★★☆☆☆</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `
@@ -1595,7 +1945,6 @@
                             <p><strong>Prompt cơ bản:</strong> Hãy tóm tắt bài viết về biến đổi khí hậu.</p>
                             <p><strong>Prompt cải tiến:</strong> Hãy tóm tắt bài viết về biến đổi khí hậu trong khoảng 150 từ. Nêu rõ nguyên nhân, hậu quả và giải pháp được đề cập trong bài.</p>
                             <p><strong>Prompt nâng cao:</strong> Bạn là một giảng viên đại học chuyên ngành môi trường. Hãy đọc bài viết về biến đổi khí hậu và: Tóm tắt nội dung trong khoảng 150 từ; Liệt kê 5 ý chính dưới dạng gạch đầu dòng; Chỉ ra nguyên nhân, hậu quả và giải pháp; Giải thích lại nội dung bằng ngôn ngữ đơn giản dành cho học sinh THPT.</p>
-                            <p style="margin-top: 10px; font-style: italic;">-> Kết quả: AI chuyển từ văn bản chung chung ngắn ngủi sang bộ tài liệu cấu trúc cực kỳ chi tiết, khoa học, phân loại rõ ràng cho đối tượng người nghe.</p>
                         </div>
                     </div>
 
@@ -1605,7 +1954,6 @@
                             <p><strong>Prompt cơ bản:</strong> AI là gì?</p>
                             <p><strong>Prompt cải tiến:</strong> Hãy giải thích AI là gì bằng ngôn ngữ đơn giản dành cho học sinh lớp 12.</p>
                             <p><strong>Prompt nâng cao:</strong> Bạn là giáo viên Tin học. Hãy giải thích AI cho học sinh lớp 12: Định nghĩa AI, Nguyên lý hoạt động, 3 ví dụ thực tế, Lợi ích của AI, Hạn chế của AI, trình bày dưới dạng các mục rõ ràng.</p>
-                            <p style="margin-top: 10px; font-style: italic;">-> Kết quả: Prompt nâng cao giúp học sinh tiếp thu một cách chủ động thông qua các ví dụ đời thực thay vì các lý thuyết học thuật sáo rỗng.</p>
                         </div>
                     </div>
 
@@ -1615,14 +1963,36 @@
                             <p><strong>Prompt cơ bản:</strong> Hãy tạo câu hỏi về biến đổi khí hậu.</p>
                             <p><strong>Prompt cải tiến:</strong> Hãy tạo 10 câu hỏi trắc nghiệm về biến đổi khí hậu và cung cấp đáp án.</p>
                             <p><strong>Prompt nâng cao:</strong> Bạn là giáo viên Địa lí. Hãy tạo: 10 câu hỏi trắc nghiệm; mỗi câu có 4 đáp án A, B, C, D; đánh dấu đáp án đúng; giải thích ngắn gọn đáp án; sắp xếp câu hỏi từ dễ đến khó.</p>
-                            <p style="margin-top: 10px; font-style: italic;">-> Kết quả: Tạo ra một học liệu tự học hoàn chỉnh nhất có kèm đáp án và lời giải thích chi tiết có giá trị ứng dụng tức thì.</p>
+                        </div>
+                    </div>
+
+                    <!-- WIDGET TƯƠNG TÁC 3: ĐÀI THỬ NGHIỆM PROMPT THỜI GIAN THỰC -->
+                    <div class="book-section">
+                        <p class="book-section-title">✦ Trải nghiệm Đài thử nghiệm Prompt và phản hồi AI</p>
+                        <p style="font-size:0.85rem; margin-bottom:12px; color:var(--star-gold);">*Chọn cấp độ câu lệnh bên dưới để theo dõi sự khác biệt vượt bậc trong cách AI phản hồi:</p>
+                        <div class="prompt-arena">
+                            <div class="prompt-selector">
+                                <button class="prompt-sel-btn active" id="sel-basic" onclick="testPromptLevel('basic')">Cơ Bản</button>
+                                <button class="prompt-sel-btn" id="sel-improved" onclick="testPromptLevel('improved')">Cải Tiến</button>
+                                <button class="prompt-sel-btn" id="sel-advanced" onclick="testPromptLevel('advanced')">Nâng Cao</button>
+                            </div>
+                            <div class="arena-terminal">
+                                <div>
+                                    <p style="font-size:0.75rem; text-transform:uppercase; margin-bottom:5px; color:var(--star-gold);">Nội dung Câu lệnh gửi đi (Prompt)</p>
+                                    <div class="terminal-panel" id="terminal-prompt">Hãy tóm tắt bài viết về biến đổi khí hậu.</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.75rem; text-transform:uppercase; margin-bottom:5px; color:#60a5fa;">Phản hồi từ AI (Response)</p>
+                                    <div class="terminal-panel output" id="terminal-response">Hãy chọn một cấp độ Prompt phía trên để theo dõi kết quả tự động sinh ra...</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `
             },
             task4: {
                 badge: "TIỂU TINH CẦU 4 ✦ LIÊN KẾT NHÓM",
-                title: "Hợp tác đám mây vượt không gian & thời gian",
+                title: "Sử dụng công cụ hợp tác trực tuyến để gắn kết tập thể",
                 content: `
                     <div class="book-section">
                         <p class="book-section-title">Mục tiêu ứng dụng thực tiễn</p>
@@ -1631,14 +2001,37 @@
                     <div class="book-section">
                         <p class="book-section-title">Chi tiết quy trình vận hành nhóm</p>
                         <ul style="padding-left: 20px; margin-top: 5px;">
-                            <li><strong>Google Docs:</strong> Sử dụng để soạn thảo dự án chung. Các thành viên cùng chỉnh sửa thời gian thực, bình luận trực tiếp để trao đổi ý tưởng và tận dụng tính năng lưu trữ lịch sử sửa đổi (Version History) để tránh mất mát thông tin.</li>
+                            <li><strong>Google Docs:</strong> Sử dụng để soạn thảo dự án chung. Các thành viên cùng chỉnh sửa thời gian thực, bình luận trực tiếp để trao đổi ý tưởng và tận dụng tính năng lưu trữ lịch sử sửa đổi để tránh mất mát thông tin.</li>
                             <li><strong>Google Drive:</strong> Lưu trữ dữ liệu tập trung. Toàn bộ hình ảnh, tài liệu tham khảo, dự thảo báo cáo được phân chia khoa học thành các thư mục con và phân quyền truy cập phù hợp cho từng thành viên.</li>
                             <li><strong>Microsoft Teams:</strong> Kênh giao tiếp chính. Dùng để nhắn tin cập nhật tiến độ hàng ngày, lên lịch họp trực tuyến khẩn cấp và trao đổi các thông báo quan trọng của nhóm.</li>
                         </ul>
                     </div>
+
+                    <!-- WIDGET TƯƠNG TÁC 4: BẢNG ĐIỀU KHIỂN TIẾN ĐỘ CỘNG TÁC -->
                     <div class="book-section">
-                        <p class="book-section-title">Cách vượt qua thách thức</p>
-                        <p>Khi các thành viên gặp xung đột về lịch học tập, nhóm đã chủ động lên lịch họp online ngoài giờ thông qua Teams, phân công nhiệm vụ cụ thể trên trang Google Docs chung và thiết lập hạn chót (deadline) rõ ràng để bảo đảm tiến độ dự án.</p>
+                        <p class="book-section-title">✦ Giả lập điều khiển giải quyết xung đột & phân chia công việc</p>
+                        <p style="font-size:0.85rem; margin-bottom:12px; color:var(--star-gold);">*Bấm nút "Giải quyết xung đột lịch trình" để phân tích quy trình tổ chức và đẩy nhanh tiến độ làm việc nhóm:</p>
+                        <div class="collab-dashboard">
+                            <div class="collab-action">
+                                <span style="font-size:0.85rem;" id="collab-status">Trạng thái: <strong>Xung đột lịch trình (Tiến độ đình trệ 15%)</strong></span>
+                                <button class="sim-btn" id="btn-resolve-collab" onclick="simulateCollabResolution()">Giải quyết xung đột</button>
+                            </div>
+                            <div class="collab-timeline">
+                                <p style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; margin-bottom:5px;">Sơ đồ công việc nhóm hoạt động</p>
+                                <div>
+                                    <div style="font-size:0.8rem; margin-bottom:3px; display:flex; justify-content:space-between;">
+                                        <span>Soạn thảo văn bản (Google Docs)</span><span id="collab-txt-prog">15%</span>
+                                    </div>
+                                    <div class="collab-task-bar"><div class="collab-progress" id="prog-docs" style="width: 15%;"></div></div>
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <div style="font-size:0.8rem; margin-bottom:3px; display:flex; justify-content:space-between;">
+                                        <span>Cấu trúc lưu trữ đám mây (Google Drive)</span><span id="collab-dry-prog">10%</span>
+                                    </div>
+                                    <div class="collab-task-bar"><div class="collab-progress" id="prog-drive" style="width: 10%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `
             },
@@ -1653,24 +2046,36 @@
                     <div class="book-section">
                         <p class="book-section-title">Quy trình thực hiện chi tiết</p>
                         <ol style="padding-left: 20px; margin-top: 5px;">
-                            <li><strong>Bước 1 - Lập sườn nội dung cùng ChatGPT:</strong> Sử dụng câu lệnh tối ưu để tạo bản tóm tắt ngắn gọn gồm 5 lợi ích lớn (như tăng năng suất, tự động hóa, hỗ trợ nghiên cứu) và 5 tác hại tiềm ẩn (nguy cơ mất việc, bảo mật thông tin, đạo đức học thuật).</li>
-                            <li><strong>Bước 2 - Vẽ minh họa cùng Microsoft Designer:</strong> Sử dụng prompt chi tiết tiếng Anh tạo lập các hình ảnh minh họa chủ đề robot công nghệ theo tông màu xanh dương thẳm hiện đại đồng nhất.</li>
-                            <li><strong>Bước 3 - Hòa phối bố cục cùng Canva AI:</strong> Lắp ráp toàn bộ dữ liệu chữ và hình ảnh vào một mẫu Infographic cân đối, điều chỉnh kiểu chữ, kích thước và màu sắc để xuất bản một tác phẩm truyền thông đẹp mắt nhất.</li>
+                            <li><strong>Lập sườn nội dung cùng ChatGPT:</strong> Sử dụng câu lệnh tối ưu để tạo bản tóm tắt ngắn gọn gồm 5 lợi ích lớn và 5 tác hại tiềm ẩn.</li>
+                            <li><strong>Vẽ minh họa cùng Microsoft Designer:</strong> Tạo sinh hình ảnh minh họa robot công nghệ theo tông màu xanh dương thẳm hiện đại đồng nhất.</li>
+                            <li><strong>Hòa phối bố cục cùng Canva AI:</strong> Lắp ráp toàn bộ dữ liệu chữ và hình ảnh vào một mẫu Infographic cân đối, điều chỉnh kiểu chữ, kích thước và màu sắc để xuất bản một tác phẩm truyền thông đẹp mắt nhất.</li>
                         </ol>
                     </div>
+
+                    <!-- WIDGET TƯƠNG TÁC 5: TRẠM THIẾT KẾ INFOGRAPHIC PHỐI HỢP AI -->
                     <div class="book-section">
-                        <p class="book-section-title">Tự đánh giá</p>
-                        <p>AI đóng vai trò xuất sắc hỗ trợ tăng 70% tốc độ thiết kế, nhưng tư duy logic và kỹ năng chỉnh sửa chi tiết của con người mới là yếu tố quyết định giá trị thẩm mỹ cuối cùng.</p>
+                        <p class="book-section-title">✦ Trạm lắp ráp Infographic tích hợp AI</p>
+                        <p style="font-size:0.85rem; margin-bottom:12px; color:var(--star-gold);">*Ấn lần lượt các nút lắp ráp để quan sát AI tạo sinh từng bước phối hợp ra lò bản Infographic hoàn thiện:</p>
+                        <div class="assembly-board">
+                            <div class="assembly-controls">
+                                <button class="sim-btn" id="btn-build-txt" onclick="buildInfographic('text')">1. Nạp sườn ChatGPT</button>
+                                <button class="sim-btn" id="btn-build-img" onclick="buildInfographic('image')" disabled>2. Nạp ảnh AI Designer</button>
+                                <button class="sim-btn" id="btn-build-canvas" onclick="buildInfographic('canvas')" disabled>3. Canva AI xuất bản</button>
+                            </div>
+                            <div class="assembly-preview" id="assembly-visual">
+                                <p style="color:var(--text-muted); font-style:italic; font-size:0.85rem;">Màn hình thiết kế đang trống. Hãy bắt đầu nạp sườn nội dung.</p>
+                            </div>
+                        </div>
                     </div>
                 `
             },
             task6: {
-                badge: "TIỂU TINH CẦU 6 ✦ LIÊM CHÍNH SỐ",
+                badge: "TIỂU TINH CẦU 6 ✦ HÀNH TINH LIÊM CHÍNH",
                 title: "Xây dựng chuẩn mực đạo đức cá nhân khi sử dụng AI",
                 content: `
                     <div class="book-section">
                         <p class="book-section-title">Chính sách AI tại giảng đường ULIS</p>
-                        <p>Nhà trường khuyến khích sinh viên chủ động tiếp cận khoa học công nghệ số mới, coi AI là công cụ bổ trợ nâng cao tư duy, tuyệt đối không phải là công cụ làm bài thay để sinh viên ỷ lại, dẫn đến suy giảm năng lực tự học thực tế.</p>
+                        <p>Nhà trường khuyến khích sinh viên chủ động tiếp cận khoa học công nghệ số mới, coi AI là công cụ hỗ trợ tư duy chứ không phải là công cụ làm bài thay để sinh viên ỷ lại, dẫn đến suy giảm năng lực tự học thực tế.</p>
                     </div>
                     <div class="book-section">
                         <p class="book-section-title">Bộ 7 quy tắc đạo đức cá nhân thiết lập</p>
@@ -1684,15 +2089,27 @@
                             <li>Luôn rèn luyện khả năng tư duy độc lập và coi AI là trợ lý thay vì người làm chủ bản thân.</li>
                         </ol>
                     </div>
+
+                    <!-- WIDGET TƯƠNG TÁC 6: TRÒ CHƠI PHÂN LOẠI HÀNH VI ĐẠO ĐỨC AI -->
                     <div class="book-section">
-                        <p class="book-section-title">Thiết kế Sơ đồ Đồ họa ứng dụng</p>
-                        <p>Xây dựng Infographic hướng dẫn cụ thể hành vi <strong>"Nên làm"</strong> (gợi ý dàn ý, sửa lỗi chính tả, dịch thuật tham khảo) và <strong>"Không nên làm"</strong> (copy 100% kết quả của AI, phụ thuộc quá mức dẫn đến giảm tư duy phản biện) để xây dựng một cộng đồng học tập liêm chính văn minh.</p>
+                        <p class="book-section-title">✦ Trò chơi phân loại Hành vi Liêm chính AI tại ULIS</p>
+                        <p style="font-size:0.85rem; margin-bottom:12px; color:var(--star-gold);">*Hãy phân loại kịch bản hiển thị bên dưới bằng cách bấm chọn cột "Nên làm" hoặc "Không nên làm":</p>
+                        <div class="ethics-game">
+                            <div class="ethics-card" id="current-scenario">
+                                Thảo luận ý tưởng dàn ý bài viết lớn cùng ChatGPT.
+                            </div>
+                            <div class="ethics-zones">
+                                <button class="ethics-zone do" onclick="checkEthicsChoice(true)">✦ Nên Làm (Do)</button>
+                                <button class="ethics-zone dont" onclick="checkEthicsChoice(false)">✦ Không Nên Làm (Don't)</button>
+                            </div>
+                            <p style="font-size:0.8rem; text-align:center; margin-top:15px; min-height:18px; color:var(--star-gold);" id="ethics-feedback"></p>
+                        </div>
                     </div>
                 `
             }
         };
 
-        // Modal triggers
+        // 6. Quản lý hoạt động đóng mở sách Modal
         function openBookModal(taskId) {
             const data = booksData[taskId];
             if (!data) return;
@@ -1715,6 +2132,228 @@
                 closeBookModal();
             }
         });
+
+        /* ==========================================================
+           HỆ THỐNG JAVASCRIPT ĐIỀU KHIỂN ĐỒ HỌA TƯƠNG TÁC XỊN XÒ
+           ========================================================== */
+
+        // GIẢ LẬP BÀI 1: File Manager Simulator
+        let currentSimStep = 1;
+        function runFileSim(step) {
+            const view = document.getElementById('explorer-content');
+            const path = document.getElementById('sim-path');
+            
+            if (step === 1) {
+                path.innerText = "This PC > Local Disk (D:) >";
+                view.innerHTML = `<div class="explorer-item folder">📁 ThucHanh_HoangMinhPhuong <span style="font-size:0.75rem; color:var(--star-gold); margin-left:10px;">[Thư mục đã tạo]</span></div>`;
+                enableNextSimBtn(2);
+            } else if (step === 2) {
+                path.innerText = "This PC > Local Disk (D:) > ThucHanh_HoangMinhPhuong >";
+                view.innerHTML = `<div class="explorer-item file">📄 GhiChu.txt <span style="font-size:0.75rem; color:#10b981; margin-left:10px;">[Tệp tin văn bản trống]</span></div>`;
+                enableNextSimBtn(3);
+            } else if (step === 3) {
+                view.innerHTML = `<div class="explorer-item file">📄 GhiChuQuanTrong.txt <span style="font-size:0.75rem; color:var(--star-gold); margin-left:10px;">[Đã đổi tên thành công]</span></div>`;
+                enableNextSimBtn(4);
+            } else if (step === 4) {
+                view.innerHTML = `
+                    <div class="explorer-item folder">📁 TaiLieu <span style="font-size:0.75rem; color:var(--star-gold); margin-left:10px;">[Thư mục con]</span></div>
+                    <div class="explorer-item file" style="opacity:0.6;">📄 GhiChuQuanTrong.txt</div>
+                `;
+                enableNextSimBtn(5);
+            } else if (step === 5) {
+                path.innerText = "This PC > Local Disk (D:) > ThucHanh_HoangMinhPhuong > TaiLieu >";
+                view.innerHTML = `
+                    <div class="explorer-item file">📄 GhiChuQuanTrong.txt <span style="font-size:0.75rem; color:#10b981; margin-left:10px;">[Bản sao đã chép]</span></div>
+                    <div class="explorer-item file">📄 DiChuyen.txt <span style="font-size:0.75rem; color:var(--fox-orange); margin-left:10px;">[Đã Cut & Paste vào đây]</span></div>
+                `;
+                enableNextSimBtn(6);
+            } else if (step === 6) {
+                view.innerHTML = `
+                    <div class="explorer-item file" style="opacity:0.4; text-decoration: line-through;">📄 GhiChuQuanTrong.txt [Đã xóa chuyển vào Recycle Bin]</div>
+                    <div class="explorer-item file" style="opacity:0.4; text-decoration: line-through;">📄 DiChuyen.txt [Đã xóa vĩnh viễn khỏi hệ thống]</div>
+                `;
+                enableNextSimBtn(7);
+            } else if (step === 7) {
+                path.innerText = "This PC > Local Disk (D:) > ThucHanh_HoangMinhPhuong > TaiLieu >";
+                view.innerHTML = `
+                    <div class="explorer-item file">📄 GhiChuQuanTrong.txt <span style="font-size:0.75rem; color:var(--star-gold); margin-left:10px;">[Khôi phục nguyên trạng thành công từ Recycle Bin]</span></div>
+                `;
+                // Hoàn tất chu kỳ giả lập, reset
+                document.getElementById('btn-step1').disabled = false;
+                document.getElementById('btn-step2').disabled = true;
+                document.getElementById('btn-step3').disabled = true;
+                document.getElementById('btn-step4').disabled = true;
+                document.getElementById('btn-step5').disabled = true;
+                document.getElementById('btn-step6').disabled = true;
+                document.getElementById('btn-step7').disabled = true;
+            }
+        }
+        function enableNextSimBtn(nextStep) {
+            for (let i = 1; i <= 7; i++) {
+                document.getElementById(`btn-step${i}`).disabled = (i !== nextStep);
+            }
+        }
+
+        // GIẢ LẬP BÀI 2: Credibility Calculator
+        function calculateCredibility() {
+            const author = parseInt(document.getElementById('slider-author').value);
+            const publisher = parseInt(document.getElementById('slider-publisher').value);
+            const method = parseInt(document.getElementById('slider-method').value);
+
+            // Cập nhật nhãn văn bản
+            const authorLabels = ["Thạc sĩ nghiên cứu", "Tiến sĩ đầu ngành", "Giáo sư học thuật danh tiếng"];
+            const publisherLabels = ["Nguồn mạng tự do / Blog", "Tạp chí nghiên cứu trong nước", "Hệ thống cơ sở quốc tế Scopus/KCI"];
+            const methodLabels = ["Cảm nhận / Đánh giá cá nhân", "Phân tích định tính sơ cấp", "Khảo sát thực nghiệm định lượng khoa học"];
+
+            document.getElementById('lbl-author').innerText = authorLabels[author - 1];
+            document.getElementById('lbl-publisher').innerText = publisherLabels[publisher - 1];
+            document.getElementById('lbl-method').innerText = methodLabels[method - 1];
+
+            // Tính tổng số điểm
+            const totalScore = author + publisher + method;
+            const scoreDisplay = document.getElementById('calc-score');
+            const starsDisplay = document.getElementById('meter-stars-display');
+
+            if (totalScore <= 4) {
+                scoreDisplay.innerText = "Độ tin cậy Thấp (" + totalScore + "/9)";
+                scoreDisplay.style.color = "var(--rose-red)";
+                starsDisplay.innerText = "★★☆☆☆";
+            } else if (totalScore <= 7) {
+                scoreDisplay.innerText = "Độ tin cậy Khá (" + totalScore + "/9)";
+                scoreDisplay.style.color = "var(--star-gold)";
+                starsDisplay.innerText = "★★★☆☆";
+            } else {
+                scoreDisplay.innerText = "Độ tin cậy Rất Cao (" + totalScore + "/9)";
+                scoreDisplay.style.color = "#10b981";
+                starsDisplay.innerText = "★★★★★";
+            }
+        }
+
+        // GIẢ LẬP BÀI 3: Prompt Testing Arena
+        const promptResponses = {
+            basic: {
+                prompt: "Hãy tóm tắt bài viết về biến đổi khí hậu.",
+                response: "Biến đổi khí hậu là sự thay đổi của hệ thống khí hậu trái đất do các tác nhân tự nhiên và hoạt động sản xuất công nghiệp của con người. Điều này gây nên sự ấm lên toàn cầu, băng tan và dâng cao mực nước biển, đe dọa nghiêm trọng đến hệ sinh thái và cuộc sống của mọi sinh vật."
+            },
+            improved: {
+                prompt: "Hãy tóm tắt bài viết về biến đổi khí hậu trong khoảng 150 từ. Nêu rõ nguyên nhân, hậu quả và giải pháp được đề cập trong bài.",
+                response: "Biến đổi khí hậu chủ yếu bắt nguồn từ khí thải nhà kính trong hoạt động công nghiệp và nạn phá rừng phá hủy bể hấp thụ CO2 của con người. Hậu quả trực tiếp bao gồm các hiện tượng thời tiết cực đoan gia tăng, hiện tượng hạn hán diện rộng và nước biển dâng cao nhấn chìm các vùng duyên hải. Để khắc phục, tài liệu chỉ rõ các giải pháp khẩn cấp: tăng cường sản xuất năng lượng tái tạo sạch, trồng rừng phủ xanh đồi trọc và thực thi các công ước bảo vệ khí hậu toàn cầu nghiêm ngặt."
+            },
+            advanced: {
+                prompt: "Bạn là một giảng viên đại học chuyên ngành môi trường. Hãy đọc bài viết về biến đổi khí hậu và: Tóm tắt nội dung 150 từ; Liệt kê 5 ý chính; Chỉ ra giải pháp; Giải thích bằng ngôn ngữ đơn giản cho học sinh THPT.",
+                response: "[Giảng Viên Môi Trường phản hồi]:\\n\\n✦ BẢN TÓM TẮT: Trái Đất của chúng ta đang đối mặt với sự thay đổi khí hậu cực kỳ nghiêm trọng mà nhân tố cốt lõi đến từ lượng khí thải CO2 khổng lồ của các nhà máy công nghiệp. \\n\\n✦ 5 Ý CHÍNH CỐT LÕI:\\n1. Nhiệt độ trung bình toàn cầu dâng cao liên tục.\\n2. Băng cực tan chảy cực nhanh đe dọa nhấn chìm các bờ biển Việt Nam.\\n3. Thiên tai cực đoan xuất hiện dày đặc bất thường.\\n4. Đa dạng sinh học bị suy thoái tàn khốc.\\n5. An ninh lương thực toàn cầu lung lay.\\n\\n✦ GIẢI THÍCH ĐƠN GIẢN CHO HỌC SINH: Hãy hình dung Trái Đất của chúng ta đang bị quấn một chiếc chăn bông cực dày làm từ khí thải nhà kính. Chiếc chăn này giữ nhiệt không cho thoát ra ngoài vũ trụ, khiến ngôi nhà chung nóng lên từng ngày. Việc chúng ta cần làm là trồng cây tạo ô-xy và hạn chế xả rác, khói bụi để gỡ bỏ chiếc chăn dày cộp đó ra!"
+            }
+        };
+        function testPromptLevel(level) {
+            const btnIds = ['basic', 'improved', 'advanced'];
+            btnIds.forEach(id => {
+                document.getElementById(`sel-${id}`).classList.remove('active');
+            });
+            document.getElementById(`sel-${level}`).classList.add('active');
+
+            // Cập nhật terminal
+            document.getElementById('terminal-prompt').innerText = promptResponses[level].prompt;
+            
+            // Hiệu ứng chữ chạy terminal giả lập
+            const responseContainer = document.getElementById('terminal-response');
+            responseContainer.innerText = "AI đang xử lý yêu cầu câu lệnh...";
+            setTimeout(() => {
+                responseContainer.innerText = promptResponses[level].response;
+            }, 500);
+        }
+
+        // GIẢ LẬP BÀI 4: Collaboration Flow
+        function simulateCollabResolution() {
+            const status = document.getElementById('collab-status');
+            const pDocs = document.getElementById('prog-docs');
+            const pDrive = document.getElementById('prog-drive');
+            const txtDocs = document.getElementById('collab-txt-prog');
+            const txtDry = document.getElementById('collab-dry-prog');
+            const btn = document.getElementById('btn-resolve-collab');
+
+            btn.disabled = true;
+            status.innerHTML = `Trạng thái: <strong>Đang xử lý (Đồng bộ hoá đám mây và họp phân công MS Teams...)</strong>`;
+
+            setTimeout(() => {
+                pDocs.style.width = "95%";
+                pDrive.style.width = "100%";
+                txtDocs.innerText = "95%";
+                txtDry.innerText = "100%";
+                status.innerHTML = `Trạng thái: <strong style="color:#10b981;">Đồng thuận cao (Đã hoàn thiện tiến độ đúng hạn 100%)</strong>`;
+            }, 1000);
+        }
+
+        // GIẢ LẬP BÀI 5: GenAI Infographic Builder
+        function buildInfographic(layer) {
+            const preview = document.getElementById('assembly-visual');
+            const btnImg = document.getElementById('btn-build-img');
+            const btnCanvas = document.getElementById('btn-build-canvas');
+
+            if (layer === 'text') {
+                preview.innerHTML = `
+                    <div style="width:100%; text-align:left; border: 1px solid rgba(255,255,255,0.05); padding:10px; border-radius:6px; background:rgba(255,255,255,0.01);">
+                        <p style="color:var(--star-gold); font-size:0.8rem; font-weight:bold;">[Dàn ý từ ChatGPT]</p>
+                        <p style="font-size:0.75rem; margin-top:5px; color:var(--text-muted);">
+                            - LỢI ÍCH: Tăng hiệu suất, Tự động hoá, Tiết kiệm thời gian...<br>
+                            - TÁC HẠI: Vi phạm quyền riêng tư, Nguy cơ mất việc làm, Lỗi thông tin...
+                        </p>
+                    </div>
+                `;
+                btnImg.disabled = false;
+            } else if (layer === 'image') {
+                preview.innerHTML += `
+                    <div style="width:100%; text-align:left; border: 1px solid rgba(96,165,250,0.15); padding:10px; border-radius:6px; background:rgba(96,165,250,0.02); margin-top:10px;">
+                        <p style="color:#60a5fa; font-size:0.8rem; font-weight:bold;">[Hình ảnh từ Microsoft Designer]</p>
+                        <p style="font-size:0.75rem; margin-top:5px; color:var(--text-muted);">
+                            ✓ Đã vẽ thành công hình robot công nghệ, minh hoạ dữ liệu xanh dương theo chuẩn đồ hoạ.
+                        </p>
+                    </div>
+                `;
+                btnCanvas.disabled = false;
+            } else if (layer === 'canvas') {
+                preview.innerHTML = `
+                    <div style="width:100%; text-align:center; border: 2px solid var(--star-gold); padding:20px; border-radius:12px; background:linear-gradient(135deg, rgba(13,27,54,0.8), rgba(5,10,20,0.9));">
+                        <span style="font-size:1.8rem; color:var(--star-gold);">✦</span>
+                        <h4 style="font-family:'Playfair Display', serif; color:#fff; font-size:1.1rem; margin-top:5px;">SẢN PHẨM INFOGRAPHIC HOÀN THIỆN</h4>
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:5px; line-height:1.4;">
+                            Sườn nội dung ngắn gọn của ChatGPT đã hòa phối đồng điệu cùng hình ảnh công nghệ của Microsoft Designer trên hệ thống khuôn vẽ của Canva AI tạo nên tác phẩm truyền thông xuất sắc nhất.
+                        </p>
+                    </div>
+                `;
+                // Reset
+                document.getElementById('btn-build-txt').disabled = false;
+                btnImg.disabled = true;
+                btnCanvas.disabled = true;
+            }
+        }
+
+        // GIẢ LẬP BÀI 6: Ethics Sorting Game
+        const scenarios = [
+            { text: "1. Nhờ ChatGPT giải thích các thuật ngữ học thuật phức tạp chưa hiểu rõ.", isCorrect: true },
+            { text: "2. Sao chép 100% văn bản tạo ra bởi AI rồi nộp dưới tên cá nhân.", isCorrect: false },
+            { text: "3. Hỏi ChatGPT gợi ý lập dàn ý cho dự án học phần.", isCorrect: true },
+            { text: "4. Đưa thẳng tài liệu nội bộ mật lên AI mà không phân tích bảo mật.", isCorrect: false },
+            { text: "5. Sử dụng AI sửa lỗi chính tả và gợi ý cấu trúc ngữ pháp tự nhiên.", isCorrect: true },
+            { text: "6. Phó mặc hoàn toàn để AI viết báo cáo và nộp mà không kiểm chứng.", isCorrect: false }
+        ];
+        let currentScenarioIndex = 0;
+        function checkEthicsChoice(choice) {
+            const feedback = document.getElementById('ethics-feedback');
+            const scenarioObj = scenarios[currentScenarioIndex];
+
+            if (choice === scenarioObj.isCorrect) {
+                feedback.innerHTML = `<span style="color:#10b981;">Chính xác! Bạn có nhận thức liêm chính học thuật vô cùng xuất sắc.</span>`;
+            } else {
+                feedback.innerHTML = `<span style="color:var(--rose-red);">Chưa chính xác! Hãy đọc kỹ lại chính sách liêm chính của ULIS.</span>`;
+            }
+
+            // Di chuyển sang kịch bản tiếp theo
+            setTimeout(() => {
+                currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
+                document.getElementById('current-scenario').innerText = scenarios[currentScenarioIndex].text;
+                feedback.innerText = "";
+            }, 1500);
+        }
     </script>
 </body>
 </html>
